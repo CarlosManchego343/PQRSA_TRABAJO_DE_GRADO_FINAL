@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pqrsafinal/Vweb/PQRS/Informaci%C3%B3nSobreTareas/columnaTareas.dart';
+import 'package:pqrsafinal/Vweb/PQRS/InformacionSobreTareas/columnaTareas.dart';
 
 import '../../../constants/Theme.dart';
 

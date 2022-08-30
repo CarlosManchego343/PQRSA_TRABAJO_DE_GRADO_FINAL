@@ -3,7 +3,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:pqrsafinal/Vweb/PQRS/Informaci%C3%B3nSobreTareas/informacionTareas.dart';
+import 'package:pqrsafinal/Vweb/PQRS/InformacionSobreTareas/informacionTareas.dart';
 import 'package:pqrsafinal/Vweb/PQRS/InformacionSobreCliente/informacionCliente.dart';
 
 import '../../../constants/Theme.dart';
