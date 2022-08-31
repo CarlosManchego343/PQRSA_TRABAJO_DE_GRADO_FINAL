@@ -40,7 +40,7 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
             "entrar",
             style: TextStyle(color: ArgonColors.black),
           ),
-          color: ArgonColors.bgTituloLogin,
+          color: ArgonColors.Botones,
         )),
         DataCell(FlatButton(
           onPressed: _irAEditar,
@@ -48,7 +48,7 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
             "Editar",
             style: TextStyle(color: ArgonColors.black),
           ),
-          color: ArgonColors.bgTituloLogin,
+          color: ArgonColors.Botones,
         ))
       ]);
     }).toList();

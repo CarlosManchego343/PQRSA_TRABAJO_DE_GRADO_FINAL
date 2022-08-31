@@ -30,7 +30,7 @@ class columnaConNumeroRadicacoPQRSAState
         builder: (context, snapshots) {
           if (!snapshots.hasData) return Text('Cargando...');
           return new DataTable(
-            headingRowColor: MaterialStateProperty.all(ArgonColors.bgTituloLogin),
+            headingRowColor: MaterialStateProperty.all(ArgonColors.columnaCodigos),
             decoration: BoxDecoration(
                 border: Border(
                     right: BorderSide(

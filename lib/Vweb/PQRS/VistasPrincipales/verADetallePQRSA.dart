@@ -26,7 +26,7 @@ class verADetallePQRSAState extends State<verADetallePQRSA> {
           title:
               Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
           automaticallyImplyLeading: false,
-          backgroundColor: ArgonColors.bgCuerpoLogin,
+          backgroundColor: ArgonColors.bgCabeceraPrincipal,
           actions: <Widget>[
             FlatButton(
                 onPressed: volverAPrincipal,

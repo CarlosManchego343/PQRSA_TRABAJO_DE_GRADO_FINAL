@@ -11,7 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/services.dart';
 
-import '../../../widgets/inputContraseñia.dart';
+import '../../../widgets/inputContrasenia.dart';
 
 class LoginWeb extends StatefulWidget {
   @override
@@ -158,7 +158,7 @@ class _LoginWebState extends State<LoginWeb> {
                                             child: Text("Inicio de sesión",
                                                 style: TextStyle(
                                                     color:
-                                                        ArgonColors.secondary,
+                                                        ArgonColors.black,
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 26)),
                                           ),
@@ -215,7 +215,7 @@ class _LoginWebState extends State<LoginWeb> {
                                             child: Center(
                                               child: FlatButton(
                                                 textColor: ArgonColors.black,
-                                                color: ArgonColors.success,
+                                                color: ArgonColors.Botones,
                                                 onPressed:
                                                     _entrarConEmailYContrasenia,
                                                 shape: RoundedRectangleBorder(
@@ -232,7 +232,7 @@ class _LoginWebState extends State<LoginWeb> {
                                                     child: Text("ACCEDER",
                                                         style: TextStyle(
                                                             color: ArgonColors
-                                                                .secondary,
+                                                                .black,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                             fontSize: 16.0))),

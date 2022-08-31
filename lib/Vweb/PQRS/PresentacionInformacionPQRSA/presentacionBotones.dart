@@ -26,7 +26,7 @@ class presentacionBotonesState
           )
         ],
       ),
-      color: ArgonColors.columnaTitulos,
+      color: ArgonColors.bgCabeceraPrincipal,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(5),
       elevation: 10,

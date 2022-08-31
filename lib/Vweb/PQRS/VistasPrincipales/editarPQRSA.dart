@@ -53,7 +53,7 @@ class editarPQRSAState extends State<editarPQRSA> {
           title:
               Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
           automaticallyImplyLeading: false,
-          backgroundColor: ArgonColors.bgCuerpoLogin,
+          backgroundColor: ArgonColors.bgCabeceraPrincipal,
           actions: <Widget>[
             FlatButton(
                 onPressed: volverAPrincipal,
@@ -129,7 +129,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: ArgonColors.BordeDeInputs,
                                     ),
                                   ),
                                 ),
@@ -187,7 +187,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ArgonColors.bgTituloLogin,
+                                    color: ArgonColors.BordeDeInputs
                                   ),
                                 ),
                               ),
@@ -332,7 +332,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                     "Editar",
                     style: TextStyle(color: ArgonColors.black),
                   ),
-                  color: ArgonColors.bgTituloLogin,
+                  color: ArgonColors.Botones,
                 ),
               ],
             ),

@@ -13,35 +13,42 @@ class columnaBotonesState extends State<columnaBotones> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        SizedBox(height: 15),
+        SizedBox(height: 50),
         FlatButton(
           onPressed: () {},
           child: Text(
             "Agregar documentos",
             style: TextStyle(color: ArgonColors.black),
           ),
-          color: ArgonColors.bgBarraDeProgreso,
+          color: ArgonColors.Botones,
+          height: 50,
+          minWidth: 100,
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 50),
         FlatButton(
           onPressed: () {},
           child: Text(
             "Terminar PQRSA",
             style: TextStyle(color: ArgonColors.black),
           ),
-          color: ArgonColors.bgBarraDeProgreso,
+          color: ArgonColors.Botones,
+          height: 50,
+          minWidth: 100,
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 50),
         FlatButton(
           onPressed: () {},
           child: Text(
             "Devolver PQRSA",
             style: TextStyle(color: ArgonColors.black),
           ),
-          color: ArgonColors.bgBarraDeProgreso,
+          color: ArgonColors.Botones,
+          height: 50,
+          minWidth: 100,
         ),
+        SizedBox(height: 50),
       ],
     );
   }

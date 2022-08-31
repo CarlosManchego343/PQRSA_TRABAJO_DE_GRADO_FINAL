@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../../../constants/Theme.dart';
 import '../../../widgets/input.dart';
-import '../../../widgets/inputContraseñia.dart';
+import '../../../widgets/inputContrasenia.dart';
 
 class ResetearContrasenia extends StatefulWidget {
   @override
@@ -122,7 +122,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                             child: Text("Cambiar contraseña",
                                                 style: TextStyle(
                                                     color:
-                                                        ArgonColors.secondary,
+                                                        ArgonColors.black,
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 26)),
                                           ),
@@ -158,7 +158,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                             child: Center(
                                               child: FlatButton(
                                                 textColor: ArgonColors.black,
-                                                color: ArgonColors.success,
+                                                color: ArgonColors.Botones,
                                                 onPressed: _cambiarLaContrasenia,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -174,7 +174,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                                     child: Text("CAMBIAR",
                                                         style: TextStyle(
                                                             color: ArgonColors
-                                                                .secondary,
+                                                                .black,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                             fontSize: 16.0))),

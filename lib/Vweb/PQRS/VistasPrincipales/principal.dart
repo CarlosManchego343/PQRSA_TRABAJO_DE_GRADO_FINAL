@@ -31,7 +31,7 @@ class PrincipalWebState extends State<PrincipalWeb> with TickerProviderStateMixi
         toolbarHeight: 100,
         title: Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
         automaticallyImplyLeading: false,
-        backgroundColor: ArgonColors.bgCuerpoLogin,
+        backgroundColor: ArgonColors.bgCabeceraPrincipal,
         actions: <Widget>[
           FlatButton(
             onPressed: salir, 
@@ -43,6 +43,7 @@ class PrincipalWebState extends State<PrincipalWeb> with TickerProviderStateMixi
             ))
         ],
         bottom: TabBar(
+          indicatorColor: ArgonColors.bgTapElejido,
           labelColor: ArgonColors.black,
           controller: _controller,
           tabs: [

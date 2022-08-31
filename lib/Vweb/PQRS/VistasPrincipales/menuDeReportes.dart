@@ -26,7 +26,7 @@ class MenuDeReportesState extends State<MenuDeReportes> {
           Flexible(
             flex: 1,
             child: Scaffold(
-              backgroundColor: ArgonColors.inputSuccess,
+              backgroundColor: ArgonColors.menuDeOpciones,
               body: ListView(
                 padding: EdgeInsets.all(0),
               children: [

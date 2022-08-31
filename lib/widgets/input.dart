@@ -24,7 +24,7 @@ class Input extends StatelessWidget {
       this.onTap,
       this.onChanged,
       this.autofocus = false,
-      this.borderColor = ArgonColors.bgTituloLogin,
+      this.borderColor = ArgonColors.BordeDeInputs,
       this.validator,
       this.keyboardType,
       required this.inputFormatter,

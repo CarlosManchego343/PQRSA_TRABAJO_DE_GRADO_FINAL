@@ -190,7 +190,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: ArgonColors.BordeDeInputs,
                                     ),
                                   ),
                                 ),
@@ -249,7 +249,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: ArgonColors.BordeDeInputs,
                                     ),
                                   ),
                                 ),
@@ -328,7 +328,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: ArgonColors.BordeDeInputs,
                                     ),
                                   ),
                                 ),
@@ -451,7 +451,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                     "Registrar",
                     style: TextStyle(color: ArgonColors.black),
                   ),
-                  color: ArgonColors.bgTituloLogin,
+                  color: ArgonColors.Botones,
                 ),
               ],
             ),

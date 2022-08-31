@@ -24,7 +24,7 @@ class informacionTareasState extends State<informacionTareas> {
                     LinearProgressIndicator(
                       backgroundColor: ArgonColors.bgBarraDeProgreso,
                       valueColor:
-                          AlwaysStoppedAnimation(ArgonColors.bgCuerpoLogin),
+                          AlwaysStoppedAnimation(ArgonColors.bgCabeceraPrincipal),
                       minHeight: 20,
                     ),
                     SizedBox(height: 15),

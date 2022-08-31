@@ -134,7 +134,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: ArgonColors.bgTituloLogin,
+                                        color: ArgonColors.BordeDeInputs,
                                       ),
                                     ),
                                   ),
@@ -256,7 +256,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                     "Registrar",
                     style: TextStyle(color: ArgonColors.black),
                   ),
-                  color: ArgonColors.bgTituloLogin,
+                  color: ArgonColors.Botones,
                 )
               ],
             ))
