@@ -24,40 +24,38 @@ class MenuDeReportesState extends State<MenuDeReportes> {
       body: Row(
         children: <Widget>[
           Flexible(
-            flex: 1,
-            child: Scaffold(
-              backgroundColor: ArgonColors.menuDeOpciones,
-              body: ListView(
-                padding: EdgeInsets.all(0),
-              children: [
-                SizedBox(height: 15),
-                ListTile(
-                  title: Text(
-                    "Reporte general",
-                    style: TextStyle(
-                      color: ArgonColors.black,
+              flex: 1,
+              child: Scaffold(
+                backgroundColor: ArgonColors.menuDeOpciones,
+                body: ListView(
+                  padding: EdgeInsets.all(0),
+                  children: [
+                    SizedBox(height: 15),
+                    ListTile(
+                      title: Text(
+                        "Reporte general",
+                        style: TextStyle(
+                          color: ArgonColors.white,
+                        ),
+                      ),
+                      leading: Icon(Icons.folder_shared_outlined,
+                          color: ArgonColors.white),
+                      onTap: () => _itemTapped(0),
                     ),
-                  ),
-                  leading: Icon(Icons.folder_shared_outlined,
-                      color: ArgonColors.black),
-                  onTap: () => _itemTapped(0),
+                    SizedBox(height: 15),
+                    ListTile(
+                      title: Text("Reporte por área",
+                          style: TextStyle(
+                            color: ArgonColors.white,
+                          )),
+                      leading:
+                          Icon(Icons.feed_outlined, color: ArgonColors.white),
+                      onTap: () => _itemTapped(1),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 15),
-                ListTile(
-                  title: Text("Reporte por área",
-                      style: TextStyle(
-                        color: ArgonColors.black,
-                      )),
-                  leading: Icon(Icons.feed_outlined, color: ArgonColors.black),
-                  onTap: () => _itemTapped(1),
-                ),
-              ],
-              ),
-            )
-            ),
-            Flexible(
-              flex: 4,
-              child: _widgetsOptions[_selectIndex])
+              )),
+          Flexible(flex: 4, child: _widgetsOptions[_selectIndex])
         ],
       ),
     );

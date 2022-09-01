@@ -4,10 +4,10 @@ import 'package:pqrsafinal/constants/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class columnaConNumeroRadicadoPQRSA extends StatefulWidget {
+class columnaConCodigo extends StatefulWidget {
   @override
-  columnaConNumeroRadicacoPQRSAState createState() =>
-      columnaConNumeroRadicacoPQRSAState();
+  columnaConCodigoState createState() =>
+      columnaConCodigoState();
 }
 
 List<DataRow> _crearFilas(QuerySnapshot snapshot) {
@@ -21,8 +21,8 @@ List<DataRow> _crearFilas(QuerySnapshot snapshot) {
   return newList;
 }
 
-class columnaConNumeroRadicacoPQRSAState
-    extends State<columnaConNumeroRadicadoPQRSA> {
+class columnaConCodigoState
+    extends State<columnaConCodigo> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -30,7 +30,8 @@ class columnaConNumeroRadicacoPQRSAState
         builder: (context, snapshots) {
           if (!snapshots.hasData) return Text('Cargando...');
           return new DataTable(
-            headingRowColor: MaterialStateProperty.all(ArgonColors.columnaCodigos),
+            headingRowColor:
+                MaterialStateProperty.all(ArgonColors.columnaCodigos),
             decoration: BoxDecoration(
                 border: Border(
                     right: BorderSide(
@@ -38,7 +39,11 @@ class columnaConNumeroRadicacoPQRSAState
               width: 2,
             ))),
             columns: [
-              new DataColumn(label: Text('Número de radicado')),
+              new DataColumn(
+                  label: Text(
+                'Número de radicado',
+                style: TextStyle(color: ArgonColors.white),
+              )),
             ],
             rows: _crearFilas(snapshots.data as QuerySnapshot<Object?>),
           );

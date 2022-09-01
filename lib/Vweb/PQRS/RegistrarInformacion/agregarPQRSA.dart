@@ -12,6 +12,7 @@ class agregarPQRSA extends StatefulWidget {
 }
 
 class agregarPQRSAtate extends State<agregarPQRSA> {
+  
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 

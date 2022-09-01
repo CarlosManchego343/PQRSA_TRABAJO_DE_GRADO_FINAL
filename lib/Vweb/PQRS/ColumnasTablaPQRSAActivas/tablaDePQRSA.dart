@@ -12,8 +12,7 @@ class tablaDePQRSA extends StatefulWidget {
 }
 
 class tablaDePQRSAState extends State<tablaDePQRSA> {
-  
-  final ScrollController _scrollController = ScrollController(); 
+  final ScrollController _scrollController = ScrollController();
 
   void _irADetalle() {
     Navigator.pushNamed(context, '/verADetallePQRSA');
@@ -59,7 +58,7 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Scrollbar( 
+      child: Scrollbar(
           controller: _scrollController,
           isAlwaysShown: true,
           scrollbarOrientation: ScrollbarOrientation.bottom,
@@ -78,15 +77,33 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
                       headingRowColor:
                           MaterialStateProperty.all(ArgonColors.columnaTitulos),
                       columns: <DataColumn>[
-                        new DataColumn(label: Text('Fecha de radicación')),
-                        new DataColumn(label: Text('Tipo de pqrsa')),
-                        new DataColumn(label: Text('Area')),
-                        new DataColumn(label: Text('Bloque')),
-                        new DataColumn(label: Text('Dirijido a')),
-                        new DataColumn(label: Text('Documento del cliente')),
-                        new DataColumn(label: Text('Documento del recibidor')),
-                        new DataColumn(label: Text('Ver a detalle')),
-                        new DataColumn(label: Text('Editar')),
+                        new DataColumn(
+                            label: Text('Fecha de radicación',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Tipo de pqrsa',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Area',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Bloque',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Dirijido a',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Documento del cliente',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Documento del recibidor',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Ver a detalle',
+                                style: TextStyle(color: ArgonColors.white))),
+                        new DataColumn(
+                            label: Text('Editar',
+                                style: TextStyle(color: ArgonColors.white))),
                       ],
                       rows:
                           _crearFilas(snapshots.data as QuerySnapshot<Object?>),

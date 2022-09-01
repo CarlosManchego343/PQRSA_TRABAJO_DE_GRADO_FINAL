@@ -1,4 +1,4 @@
-import 'package:pqrsafinal/Vweb/PQRS/ColumnasTablaPQRSAActivas/columnaConNumeroRadicadoPQRSA.dart';
+import 'package:pqrsafinal/Vweb/PQRS/ColumnasTablaPQRSAActivas/columnaConCodigo.dart';
 import 'package:pqrsafinal/Vweb/PQRS/ColumnasTablaPQRSAActivas/tablaDePQRSA.dart';
 import 'package:pqrsafinal/constants/Theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class PQRSActivasState extends State<PQRSActivas> {
         child: SingleChildScrollView(
           child: Row(
             children: [
-              columnaConNumeroRadicadoPQRSA(),
+              columnaConCodigo(),
               tablaDePQRSA()
             ],
           ),

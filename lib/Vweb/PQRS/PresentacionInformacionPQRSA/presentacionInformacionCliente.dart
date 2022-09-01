@@ -38,8 +38,12 @@ class presentacionInformacionClienteState
           )
         ],
       ),
-      color: ArgonColors.columnaTitulos,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      color: ArgonColors.white,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: ArgonColors.columnaCodigos
+        ),
+        borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(5),
       elevation: 10,
     );
