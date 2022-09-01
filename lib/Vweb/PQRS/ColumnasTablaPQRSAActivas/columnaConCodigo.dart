@@ -6,23 +6,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class columnaConCodigo extends StatefulWidget {
   @override
-  columnaConCodigoState createState() =>
-      columnaConCodigoState();
+  columnaConCodigoState createState() => columnaConCodigoState();
 }
 
 List<DataRow> _crearFilas(QuerySnapshot snapshot) {
   List<DataRow> newList =
       snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-    return new DataRow(cells: [
-      DataCell(Text(documentSnapshot.id)),
+    return new DataRow(
+
+      cells: [
+      DataCell(
+          Center(
+          child: Text(
+        documentSnapshot.id,
+      ))),
     ]);
   }).toList();
 
   return newList;
 }
 
-class columnaConCodigoState
-    extends State<columnaConCodigo> {
+class columnaConCodigoState extends State<columnaConCodigo> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -30,6 +34,7 @@ class columnaConCodigoState
         builder: (context, snapshots) {
           if (!snapshots.hasData) return Text('Cargando...');
           return new DataTable(
+            border: TableBorder.all(width: 1.0, color: ArgonColors.black),
             headingRowColor:
                 MaterialStateProperty.all(ArgonColors.columnaCodigos),
             decoration: BoxDecoration(
@@ -40,10 +45,11 @@ class columnaConCodigoState
             ))),
             columns: [
               new DataColumn(
-                  label: Text(
-                'Número de radicado',
+                  label: Center(
+                      child: Text(
+                'Codigo',
                 style: TextStyle(color: ArgonColors.white),
-              )),
+              )))
             ],
             rows: _crearFilas(snapshots.data as QuerySnapshot<Object?>),
           );
