@@ -3,7 +3,7 @@ import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/verADetallePQRSA.dart';
 import 'package:pqrsafinal/Vweb/PQRS/IngresoAlAplicativo/ResetearContrasenia.dart';
 import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/principal.dart';
 import 'package:pqrsafinal/firebase_options.dart';
-import 'package:pqrsafinal/widgets/scrollViewWeb.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/ScrollViewWeb.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Vweb/PQRS/IngresoAlAplicativo/loginWeb.dart';

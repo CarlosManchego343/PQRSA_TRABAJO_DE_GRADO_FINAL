@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../constants/Theme.dart';
-import '../../../widgets/input.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/input.dart';
 
 class editarPQRSA extends StatefulWidget {
   @override

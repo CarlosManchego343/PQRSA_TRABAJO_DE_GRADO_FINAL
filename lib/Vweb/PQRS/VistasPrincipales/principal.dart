@@ -2,7 +2,6 @@ import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/menuDeReportes.dart';
 import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/PQRSActivas.dart';
 import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/menuCreacionPQRS.dart';
 import 'package:pqrsafinal/constants/Theme.dart';
-import 'package:pqrsafinal/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 
 class PrincipalWeb extends StatefulWidget {

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
 import 'package:pqrsafinal/constants/Theme.dart';
-import 'package:pqrsafinal/widgets/input.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pqrsafinal/constants/Theme.dart';
-import 'package:pqrsafinal/widgets/input.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -37,6 +37,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
 
   _limpiarCampos() {
     _municipioSeleccionado = "Municipio de residencia";
+    _municipio = ['Municipio de residencia', 'Aracataca', 'Pueblo viejo'];
     _nombreCliente!.text = "";
     _documentoCliente!.text = "";
     _telefono!.text = "";

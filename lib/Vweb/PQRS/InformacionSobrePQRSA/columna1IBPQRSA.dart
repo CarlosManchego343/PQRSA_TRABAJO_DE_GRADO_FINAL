@@ -21,7 +21,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Número de radicado:",
+                  child: Text("Codigo:",
                       style: TextStyle(fontSize: 18, color: ArgonColors.black, fontWeight: FontWeight.bold)),
                 ),
                 Align(

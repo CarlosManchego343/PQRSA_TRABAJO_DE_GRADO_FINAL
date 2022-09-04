@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:pqrsafinal/constants/Theme.dart';
 
 //widgets
-import 'package:pqrsafinal/widgets/input.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/services.dart';
 
-import '../../../widgets/inputContrasenia.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/inputContrasenia.dart';
 
 class LoginWeb extends StatefulWidget {
   @override

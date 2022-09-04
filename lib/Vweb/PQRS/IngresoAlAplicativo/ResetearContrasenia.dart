@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../constants/Theme.dart';
-import '../../../widgets/input.dart';
-import '../../../widgets/inputContrasenia.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/input.dart';
+import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/inputContrasenia.dart';
 
 class ResetearContrasenia extends StatefulWidget {
   @override
