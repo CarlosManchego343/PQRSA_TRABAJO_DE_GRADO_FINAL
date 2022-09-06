@@ -1,12 +1,12 @@
-import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/editarPQRSA.dart';
-import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/verADetallePQRSA.dart';
-import 'package:pqrsafinal/Vweb/PQRS/IngresoAlAplicativo/ResetearContrasenia.dart';
-import 'package:pqrsafinal/Vweb/PQRS/VistasPrincipales/principal.dart';
+import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/editarPQRSA.dart';
+import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/verADetallePQRSA.dart';
+import 'package:pqrsafinal/Usuarios/ui/IngresoAlAplicativo/ResetearContrasenia.dart';
+import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/principal.dart';
 import 'package:pqrsafinal/firebase_options.dart';
-import 'package:pqrsafinal/Vweb/PQRS/WidgetsGenerales/ScrollViewWeb.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ScrollViewWeb.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Vweb/PQRS/IngresoAlAplicativo/loginWeb.dart';
+import 'Usuarios/ui/IngresoAlAplicativo/loginWeb.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
