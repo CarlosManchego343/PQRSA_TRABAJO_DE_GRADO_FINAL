@@ -26,13 +26,13 @@ class verADetallePQRSAState extends State<verADetallePQRSA> {
           title:
               Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
           automaticallyImplyLeading: false,
-          backgroundColor: ArgonColors.bgCabeceraPrincipal,
+          backgroundColor: Colores.bgCabeceraPrincipal,
           actions: <Widget>[
             FlatButton(
                 onPressed: volverAPrincipal,
                 child: Text(
                   'Volver al menú',
-                  style: TextStyle(color: ArgonColors.black, fontSize: 20),
+                  style: TextStyle(color: Colores.black, fontSize: 20),
                 ))
           ],
         ),

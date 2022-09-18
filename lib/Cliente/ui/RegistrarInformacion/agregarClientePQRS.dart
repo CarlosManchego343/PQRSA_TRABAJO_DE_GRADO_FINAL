@@ -116,7 +116,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                     filled: true,
                                     errorMaxLines: 2,
                                     labelStyle:
-                                        TextStyle(color: ArgonColors.black),
+                                        TextStyle(color: Colores.black),
                                     contentPadding: const EdgeInsets.only(
                                         top: 16.0, left: 10.0),
                                     border: OutlineInputBorder(
@@ -135,7 +135,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: ArgonColors.BordeDeInputs,
+                                        color: Colores.BordeDeInputs,
                                       ),
                                     ),
                                   ),
@@ -255,9 +255,9 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                   onPressed: _AgregarCliente,
                   child: Text(
                     "Registrar",
-                    style: TextStyle(color: ArgonColors.black),
+                    style: TextStyle(color: Colores.black),
                   ),
-                  color: ArgonColors.Botones,
+                  color: Colores.Botones,
                 )
               ],
             ))

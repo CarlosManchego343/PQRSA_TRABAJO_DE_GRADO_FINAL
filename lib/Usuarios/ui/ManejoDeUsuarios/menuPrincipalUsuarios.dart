@@ -32,17 +32,20 @@ class menuPrincipalUsuarioState extends State<menuPrincipalUsuario> with TickerP
         toolbarHeight: 100,
         title: Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
         automaticallyImplyLeading: false,
-        backgroundColor: ArgonColors.bgCabeceraPrincipal,
+        backgroundColor: Colores.bgCabeceraPrincipal,
         actions: <Widget>[
           IconButton(
             onPressed: salir, 
             icon: Icon(
-              Icons.exit_to_app_rounded
-            ))
+              Icons.exit_to_app_rounded,
+              color: Colores.botonIconos,
+            ),
+            iconSize: 100,
+            ),     
         ],
         bottom: TabBar(
-          indicatorColor: ArgonColors.bgTapElejido,
-          labelColor: ArgonColors.black,
+          indicatorColor: Colores.bgTapElejido,
+          labelColor: Colores.black,
           controller: _controller,
           tabs: [
             Tab(text: "Usuarios"),

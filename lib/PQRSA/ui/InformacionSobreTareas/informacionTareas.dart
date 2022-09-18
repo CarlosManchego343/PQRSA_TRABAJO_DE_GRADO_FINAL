@@ -22,9 +22,9 @@ class informacionTareasState extends State<informacionTareas> {
                 Column(
                   children: <Widget>[
                     LinearProgressIndicator(
-                      backgroundColor: ArgonColors.bgBarraDeProgreso,
+                      backgroundColor: Colores.bgBarraDeProgreso,
                       valueColor:
-                          AlwaysStoppedAnimation(ArgonColors.bgCabeceraPrincipal),
+                          AlwaysStoppedAnimation(Colores.bgCabeceraPrincipal),
                       minHeight: 20,
                     ),
                     SizedBox(height: 15),

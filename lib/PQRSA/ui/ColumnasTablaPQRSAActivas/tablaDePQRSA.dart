@@ -63,19 +63,19 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
           onPressed: _irADetalle,
           child: Text(
             "entrar",
-            style: TextStyle(color: ArgonColors.black),
+            style: TextStyle(color: Colores.black),
             textAlign: TextAlign.center,
           ),
-          color: ArgonColors.Botones,
+          color: Colores.Botones,
         )),
         DataCell(FlatButton(
           onPressed: _irAEditar,
           child: Text(
             "Editar",
-            style: TextStyle(color: ArgonColors.black),
+            style: TextStyle(color: Colores.black),
             textAlign: TextAlign.center,
           ),
-          color: ArgonColors.Botones,
+          color: Colores.Botones,
         ))
       ]);
     }).toList();
@@ -102,55 +102,55 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
                   builder: (context, snapshots) {
                     if (!snapshots.hasData) return Text('Cargando...');
                     return new DataTable(
-                      border: TableBorder.all(width: 1.0, color: ArgonColors.black),
+                      border: TableBorder.all(width: 1.0, color: Colores.black),
                       headingRowColor:
-                          MaterialStateProperty.all(ArgonColors.columnaTitulos),
+                          MaterialStateProperty.all(Colores.columnaTitulos),
                       columns: <DataColumn>[
                         new DataColumn(
                             label: Center(
                                 child: Text('Fecha de radicación',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Tipo de pqrsa',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Area',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Bloque',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Dirijido a',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Documento del cliente',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Documento del recibidor',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Ver a detalle',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Editar',
                                     style:
-                                        TextStyle(color: ArgonColors.white)))),
+                                        TextStyle(color: Colores.white)))),
                       ],
                       rows:
                           _crearFilas(snapshots.data as QuerySnapshot<Object?>),

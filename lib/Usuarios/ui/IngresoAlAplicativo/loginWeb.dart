@@ -117,11 +117,11 @@ class _LoginWebState extends State<LoginWeb> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.15,
                                   decoration: BoxDecoration(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: Colores.bgTituloLogin,
                                       border: Border(
                                           bottom: BorderSide(
                                               width: 0.5,
-                                              color: ArgonColors.black))),
+                                              color: Colores.black))),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -133,7 +133,7 @@ class _LoginWebState extends State<LoginWeb> {
                                             const EdgeInsets.only(top: 8.0),
                                         child: Text("Bienvenido",
                                             style: TextStyle(
-                                                color: ArgonColors.black,
+                                                color: Colores.black,
                                                 fontSize: 36.0)),
                                       )),
                                       // Divider()
@@ -142,7 +142,7 @@ class _LoginWebState extends State<LoginWeb> {
                               Container(
                                   height:
                                       MediaQuery.of(context).size.height * 0.48,
-                                  color: ArgonColors.bgCuerpoLogin,
+                                  color: Colores.bgCuerpoLogin,
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
@@ -158,7 +158,7 @@ class _LoginWebState extends State<LoginWeb> {
                                             child: Text("Inicio de sesión",
                                                 style: TextStyle(
                                                     color:
-                                                        ArgonColors.black,
+                                                        Colores.black,
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 26)),
                                           ),
@@ -176,7 +176,7 @@ class _LoginWebState extends State<LoginWeb> {
                                                   placeholder: "Correo",
                                                   prefixIcon: Icon(
                                                     Icons.email,
-                                                    color: ArgonColors.black,
+                                                    color: Colores.black,
                                                   ),
                                                   controller: _email,
                                                   validator: (email) {
@@ -197,7 +197,7 @@ class _LoginWebState extends State<LoginWeb> {
                                                   placeholder: "Contraseña",
                                                   prefixIcon: Icon(
                                                     Icons.lock,
-                                                    color: ArgonColors.black,
+                                                    color: Colores.black,
                                                   ),
                                                   controller: _contrasenia,
                                                   validator: (contraseina) {
@@ -214,8 +214,8 @@ class _LoginWebState extends State<LoginWeb> {
                                                 const EdgeInsets.only(top: 16),
                                             child: Center(
                                               child: FlatButton(
-                                                textColor: ArgonColors.black,
-                                                color: ArgonColors.Botones,
+                                                textColor: Colores.black,
+                                                color: Colores.Botones,
                                                 onPressed:
                                                     _entrarConEmailYContrasenia,
                                                 shape: RoundedRectangleBorder(
@@ -231,7 +231,7 @@ class _LoginWebState extends State<LoginWeb> {
                                                         bottom: 12),
                                                     child: Text("ACCEDER",
                                                         style: TextStyle(
-                                                            color: ArgonColors
+                                                            color: Colores
                                                                 .black,
                                                             fontWeight:
                                                                 FontWeight.w600,

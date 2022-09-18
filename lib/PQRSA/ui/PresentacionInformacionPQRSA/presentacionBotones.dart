@@ -26,10 +26,10 @@ class presentacionBotonesState
           )
         ],
       ),
-      color: ArgonColors.white,
+      color: Colores.white,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: ArgonColors.columnaCodigos
+          color: Colores.columnaCodigos
         ),
         borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(5),

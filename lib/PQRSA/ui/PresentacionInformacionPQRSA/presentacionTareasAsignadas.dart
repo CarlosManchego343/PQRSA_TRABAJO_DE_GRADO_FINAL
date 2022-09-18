@@ -26,7 +26,7 @@ class presentacionTareasAsignadasState
             child: Align(
               alignment: Alignment.center,
               child: Text("Tareas",
-                  style: TextStyle(fontSize: 34, color: ArgonColors.black)),
+                  style: TextStyle(fontSize: 34, color: Colores.black)),
             ),
           ),
           Divider(
@@ -34,17 +34,17 @@ class presentacionTareasAsignadasState
             thickness: 1.5,
             indent: 32.0,
             endIndent: 32.0,
-            color: ArgonColors.black,
+            color: Colores.black,
           ),
           Row(
             children: <Widget>[informacionTareas()],
           )
         ],
       ),
-      color: ArgonColors.white,
+      color: Colores.white,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: ArgonColors.columnaCodigos
+          color: Colores.columnaCodigos
         ),
         borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(5),

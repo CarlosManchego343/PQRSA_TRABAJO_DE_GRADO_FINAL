@@ -81,11 +81,11 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.15,
                                   decoration: BoxDecoration(
-                                      color: ArgonColors.bgTituloLogin,
+                                      color: Colores.bgTituloLogin,
                                       border: Border(
                                           bottom: BorderSide(
                                               width: 0.5,
-                                              color: ArgonColors.black))),
+                                              color: Colores.black))),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -97,7 +97,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                             const EdgeInsets.only(top: 8.0),
                                         child: Text("Bienvenido",
                                             style: TextStyle(
-                                                color: ArgonColors.black,
+                                                color: Colores.black,
                                                 fontSize: 36.0)),
                                       )),
                                       // Divider()
@@ -106,7 +106,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                               Container(
                                   height:
                                       MediaQuery.of(context).size.height * 0.48,
-                                  color: ArgonColors.bgCuerpoLogin,
+                                  color: Colores.bgCuerpoLogin,
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
@@ -122,7 +122,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                             child: Text("Cambiar contraseña",
                                                 style: TextStyle(
                                                     color:
-                                                        ArgonColors.black,
+                                                        Colores.black,
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 26)),
                                           ),
@@ -140,7 +140,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                                   placeholder: "Correo",
                                                   prefixIcon: Icon(
                                                     Icons.email,
-                                                    color: ArgonColors.black,
+                                                    color: Colores.black,
                                                   ),
                                                   controller: _email,
                                                   validator: (email) {
@@ -157,8 +157,8 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                                 const EdgeInsets.only(top: 16),
                                             child: Center(
                                               child: FlatButton(
-                                                textColor: ArgonColors.black,
-                                                color: ArgonColors.Botones,
+                                                textColor: Colores.black,
+                                                color: Colores.Botones,
                                                 onPressed: _cambiarLaContrasenia,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -173,7 +173,7 @@ class ResetearContraseniaState extends State<ResetearContrasenia> {
                                                         bottom: 12),
                                                     child: Text("CAMBIAR",
                                                         style: TextStyle(
-                                                            color: ArgonColors
+                                                            color: Colores
                                                                 .black,
                                                             fontWeight:
                                                                 FontWeight.w600,

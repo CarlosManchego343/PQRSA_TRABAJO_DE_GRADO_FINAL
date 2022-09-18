@@ -22,12 +22,12 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Codigo:",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black, fontWeight: FontWeight.bold)),
+                      style: TextStyle(fontSize: 18, color: Colores.black, fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("WAPPET-2020-00127",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             ),
@@ -38,7 +38,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         SizedBox(height: 5),
         Column(
@@ -49,12 +49,12 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Fecha de radicación:",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black, fontWeight: FontWeight.bold)),
+                      style: TextStyle(fontSize: 18, color: Colores.black, fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("16/09/2020",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -65,7 +65,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -75,12 +75,12 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Tipo de PQRSA:",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black, fontWeight: FontWeight.bold)),
+                      style: TextStyle(fontSize: 18, color: Colores.black, fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("Petición",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -91,7 +91,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -103,13 +103,13 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                   child: Text("Recibida por:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("1007656588",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )

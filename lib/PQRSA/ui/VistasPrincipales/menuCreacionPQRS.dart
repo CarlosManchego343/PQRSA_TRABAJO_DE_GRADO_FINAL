@@ -26,7 +26,7 @@ class menuCreacionPQRSState extends State<menuCreacionPQRS> {
           Flexible(
               flex: 1,
               child: Scaffold(
-                backgroundColor: ArgonColors.menuDeOpciones,
+                backgroundColor: Colores.menuDeOpciones,
                 body: ListView(
                   padding: EdgeInsets.all(0),
                   children: [
@@ -35,21 +35,21 @@ class menuCreacionPQRSState extends State<menuCreacionPQRS> {
                       title: Text(
                         "Agregar un cliente",
                         style: TextStyle(
-                          color: ArgonColors.white,
+                          color: Colores.white,
                         ),
                       ),
                       leading: Icon(Icons.folder_shared_outlined,
-                          color: ArgonColors.white),
+                          color: Colores.white),
                       onTap: () => _itemTapped(0),
                     ),
                     SizedBox(height: 15),
                     ListTile(
                       title: Text("Agregar una PQRSA",
                           style: TextStyle(
-                            color: ArgonColors.white,
+                            color: Colores.white,
                           )),
                       leading:
-                          Icon(Icons.feed_outlined, color: ArgonColors.white),
+                          Icon(Icons.feed_outlined, color: Colores.white),
                       onTap: () => _itemTapped(1),
                     ),
                   ],

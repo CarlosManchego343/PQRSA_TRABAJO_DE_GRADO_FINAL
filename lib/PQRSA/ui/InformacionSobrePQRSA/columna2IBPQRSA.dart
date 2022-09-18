@@ -24,14 +24,14 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                   child: Text("Asunto:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Text(
                       "Respuesta proyectos de inversión social vigencias 2018, 2019 y 2020",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             ),
@@ -42,7 +42,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -54,13 +54,13 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                   child: Text("Dirijido a:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("Trevor Belmont",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -71,7 +71,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -83,13 +83,13 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                   child: Text("Bloque:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("Vallemedio",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )

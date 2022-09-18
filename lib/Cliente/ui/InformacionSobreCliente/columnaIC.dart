@@ -24,13 +24,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Número de documento:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("1007565696",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -41,7 +41,7 @@ class columnaICState extends State<columnaIC> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -53,13 +53,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Nombre:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("León Ernesto Perez Torrez",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -70,7 +70,7 @@ class columnaICState extends State<columnaIC> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -82,13 +82,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Telefono:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("3134568970",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -99,7 +99,7 @@ class columnaICState extends State<columnaIC> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -111,13 +111,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Correo electronico:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("leonept@gmail.com",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -128,7 +128,7 @@ class columnaICState extends State<columnaIC> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -140,13 +140,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Dirección:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("Carrera 3-B #45 - 06",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )
@@ -157,7 +157,7 @@ class columnaICState extends State<columnaIC> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -169,13 +169,13 @@ class columnaICState extends State<columnaIC> {
                   child: Text("Municipio:",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text("Pueblo viejo",
-                      style: TextStyle(fontSize: 18, color: ArgonColors.black)),
+                      style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
             )

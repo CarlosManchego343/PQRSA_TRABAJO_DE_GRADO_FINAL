@@ -24,7 +24,7 @@ class presentacionInformacionPQRSAState
             child: Align(
               alignment: Alignment.center,
               child: Text("Datos de la PQRSA",
-                  style: TextStyle(fontSize: 34, color: ArgonColors.black)),
+                  style: TextStyle(fontSize: 34, color: Colores.black)),
             ),
           ),
           Divider(
@@ -38,10 +38,10 @@ class presentacionInformacionPQRSAState
           )
         ],
       ),
-      color: ArgonColors.white,
+      color: Colores.white,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: ArgonColors.columnaCodigos
+          color: Colores.columnaCodigos
         ),
         borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(5),

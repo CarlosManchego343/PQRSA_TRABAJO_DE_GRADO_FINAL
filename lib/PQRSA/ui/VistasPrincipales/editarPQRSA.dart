@@ -53,13 +53,13 @@ class editarPQRSAState extends State<editarPQRSA> {
           title:
               Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
           automaticallyImplyLeading: false,
-          backgroundColor: ArgonColors.bgCabeceraPrincipal,
+          backgroundColor: Colores.bgCabeceraPrincipal,
           actions: <Widget>[
             FlatButton(
                 onPressed: volverAPrincipal,
                 child: Text(
                   'Volver al menú',
-                  style: TextStyle(color: ArgonColors.black, fontSize: 20),
+                  style: TextStyle(color: Colores.black, fontSize: 20),
                 ))
           ],
         ),
@@ -110,7 +110,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                                   filled: true,
                                   errorMaxLines: 2,
                                   labelStyle:
-                                      TextStyle(color: ArgonColors.black),
+                                      TextStyle(color: Colores.black),
                                   contentPadding: const EdgeInsets.only(
                                       top: 16.0, left: 10.0),
                                   border: OutlineInputBorder(
@@ -129,7 +129,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: ArgonColors.BordeDeInputs,
+                                      color: Colores.BordeDeInputs,
                                     ),
                                   ),
                                 ),
@@ -168,7 +168,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                               decoration: InputDecoration(
                                 filled: true,
                                 errorMaxLines: 2,
-                                labelStyle: TextStyle(color: ArgonColors.black),
+                                labelStyle: TextStyle(color: Colores.black),
                                 contentPadding: const EdgeInsets.only(
                                     top: 16.0, left: 10.0),
                                 border: OutlineInputBorder(
@@ -187,7 +187,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ArgonColors.BordeDeInputs
+                                    color: Colores.BordeDeInputs
                                   ),
                                 ),
                               ),
@@ -330,9 +330,9 @@ class editarPQRSAState extends State<editarPQRSA> {
                   },
                   child: Text(
                     "Editar",
-                    style: TextStyle(color: ArgonColors.black),
+                    style: TextStyle(color: Colores.black),
                   ),
-                  color: ArgonColors.Botones,
+                  color: Colores.Botones,
                 ),
               ],
             ),

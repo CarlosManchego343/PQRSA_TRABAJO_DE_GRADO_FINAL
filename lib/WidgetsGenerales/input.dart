@@ -24,7 +24,7 @@ class Input extends StatelessWidget {
       this.onTap,
       this.onChanged,
       this.autofocus = false,
-      this.borderColor = ArgonColors.BordeDeInputs,
+      this.borderColor = Colores.BordeDeInputs,
       this.validator,
       this.keyboardType,
       required this.inputFormatter,
@@ -35,7 +35,7 @@ class Input extends StatelessWidget {
     
     return TextFormField(
         obscureText: false,
-        cursorColor: ArgonColors.muted,
+        cursorColor: Colores.muted,
         onTap: onTap as void Function()?,
         onChanged: onChanged as void Function(String)?,
         controller: controller,
@@ -44,13 +44,13 @@ class Input extends StatelessWidget {
         inputFormatters: <TextInputFormatter>[inputFormatter],
         keyboardType: keyboardType,
         style:
-            TextStyle(height: 0.85, fontSize: 14.0, color: ArgonColors.black),
+            TextStyle(height: 0.85, fontSize: 14.0, color: Colores.black),
         textAlignVertical: TextAlignVertical(y: 0.6),
         decoration: InputDecoration(
             filled: true,
-            fillColor: ArgonColors.white,
+            fillColor: Colores.white,
             hintStyle: TextStyle(
-              color: ArgonColors.black,
+              color: Colores.black,
             ),
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,

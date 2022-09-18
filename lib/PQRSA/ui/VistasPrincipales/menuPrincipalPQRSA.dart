@@ -30,20 +30,20 @@ class menuPrincipalPQRSAState extends State<menuPrincipalPQRSA> with TickerProvi
         toolbarHeight: 100,
         title: Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
         automaticallyImplyLeading: false,
-        backgroundColor: ArgonColors.bgCabeceraPrincipal,
+        backgroundColor: Colores.bgCabeceraPrincipal,
         actions: <Widget>[
           FlatButton(
             onPressed: salir, 
             child: Text('Cerrar sesión',
             style: TextStyle(
-              color: ArgonColors.black,
+              color: Colores.black,
               fontSize: 20
             ),
             ))
         ],
         bottom: TabBar(
-          indicatorColor: ArgonColors.bgTapElejido,
-          labelColor: ArgonColors.black,
+          indicatorColor: Colores.bgTapElejido,
+          labelColor: Colores.black,
           controller: _controller,
           tabs: [
             Tab(text: "Consultar PQRSA"),

@@ -27,7 +27,7 @@ class columnaTareasState extends State<columnaTareas> {
                   child: Text("Nombre",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
                 Align(
@@ -35,7 +35,7 @@ class columnaTareasState extends State<columnaTareas> {
                   child: Text("Estado",
                       style: TextStyle(
                           fontSize: 18,
-                          color: ArgonColors.black,
+                          color: Colores.black,
                           fontWeight: FontWeight.bold)),
                 ),
               ],
@@ -47,7 +47,7 @@ class columnaTareasState extends State<columnaTareas> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -59,7 +59,7 @@ class columnaTareasState extends State<columnaTareas> {
                   child: Text("Comer manzanas",
                       style: TextStyle(
                         fontSize: 18,
-                        color: ArgonColors.black,
+                        color: Colores.black,
                       )),
                 ),
                 Align(
@@ -81,7 +81,7 @@ class columnaTareasState extends State<columnaTareas> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -93,7 +93,7 @@ class columnaTareasState extends State<columnaTareas> {
                   child: Text("Arreglar el cuarto",
                       style: TextStyle(
                         fontSize: 18,
-                        color: ArgonColors.black,
+                        color: Colores.black,
                       )),
                 ),
                 Align(
@@ -115,7 +115,7 @@ class columnaTareasState extends State<columnaTareas> {
           thickness: 1.5,
           indent: 32.0,
           endIndent: 32.0,
-          color: ArgonColors.black,
+          color: Colores.black,
         ),
         Column(
           children: <Widget>[
@@ -127,7 +127,7 @@ class columnaTareasState extends State<columnaTareas> {
                   child: Text("Graduarme",
                       style: TextStyle(
                         fontSize: 18,
-                        color: ArgonColors.black,
+                        color: Colores.black,
                       )),
                 ),
                 Align(

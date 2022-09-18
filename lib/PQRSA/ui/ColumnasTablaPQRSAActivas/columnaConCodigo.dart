@@ -34,13 +34,13 @@ class columnaConCodigoState extends State<columnaConCodigo> {
         builder: (context, snapshots) {
           if (!snapshots.hasData) return Text('Cargando...');
           return new DataTable(
-            border: TableBorder.all(width: 1.0, color: ArgonColors.black),
+            border: TableBorder.all(width: 1.0, color: Colores.black),
             headingRowColor:
-                MaterialStateProperty.all(ArgonColors.columnaCodigos),
+                MaterialStateProperty.all(Colores.columnaCodigos),
             decoration: BoxDecoration(
                 border: Border(
                     right: BorderSide(
-              color: ArgonColors.border,
+              color: Colores.BordeDeInputs,
               width: 2,
             ))),
             columns: [
@@ -48,7 +48,7 @@ class columnaConCodigoState extends State<columnaConCodigo> {
                   label: Center(
                       child: Text(
                 'Codigo',
-                style: TextStyle(color: ArgonColors.white),
+                style: TextStyle(color: Colores.white),
               )))
             ],
             rows: _crearFilas(snapshots.data as QuerySnapshot<Object?>),
