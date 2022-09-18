@@ -1,16 +1,18 @@
-import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/menuDeReportes.dart';
-import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/PQRSActivas.dart';
-import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/menuCreacionPQRS.dart';
-import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/Usuarios/ui/ManejoDeUsuarios/tablaDeManejo.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/menuDeReportes.dart';
 
-class PrincipalWeb extends StatefulWidget {
+import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
+
+
+class menuPrincipalUsuario extends StatefulWidget {
   @override
-  PrincipalWebState createState() => PrincipalWebState();
+  menuPrincipalUsuarioState createState() => menuPrincipalUsuarioState();
 }
 
-class PrincipalWebState extends State<PrincipalWeb> with TickerProviderStateMixin{
-  List<Widget> pages = [PQRSActivas(), menuCreacionPQRS(), MenuDeReportes()];
+class menuPrincipalUsuarioState extends State<menuPrincipalUsuario> with TickerProviderStateMixin{
+
+  List<Widget> pages = [tablaDeManejo(), MenuDeReportes()];
   late TabController _controller;
 
   @override
@@ -32,13 +34,10 @@ class PrincipalWebState extends State<PrincipalWeb> with TickerProviderStateMixi
         automaticallyImplyLeading: false,
         backgroundColor: ArgonColors.bgCabeceraPrincipal,
         actions: <Widget>[
-          FlatButton(
+          IconButton(
             onPressed: salir, 
-            child: Text('Cerrar sesión',
-            style: TextStyle(
-              color: ArgonColors.black,
-              fontSize: 20
-            ),
+            icon: Icon(
+              Icons.exit_to_app_rounded
             ))
         ],
         bottom: TabBar(
@@ -46,9 +45,8 @@ class PrincipalWebState extends State<PrincipalWeb> with TickerProviderStateMixi
           labelColor: ArgonColors.black,
           controller: _controller,
           tabs: [
-            Tab(text: "Consultar PQRSA"),
-            Tab(text: "Crear PQRSA"),
-            Tab(text: "Reportes de la PQRSA")
+            Tab(text: "Usuarios"),
+            Tab(text: "Reportes de las PQRSA")
           ],
         ),
       ),

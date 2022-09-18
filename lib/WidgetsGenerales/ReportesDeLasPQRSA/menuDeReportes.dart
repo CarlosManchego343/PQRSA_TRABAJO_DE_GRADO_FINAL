@@ -1,5 +1,5 @@
-import 'package:pqrsafinal/PQRSA/ui/ReportesDeLasPQRSA/reportesArea.dart';
-import 'package:pqrsafinal/PQRSA/ui/ReportesDeLasPQRSA/reportesGenerales.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/reportesArea.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/reportesGenerales.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:flutter/material.dart';
 
