@@ -1,5 +1,6 @@
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/editarPQRSA.dart';
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/verADetallePQRSA.dart';
+import 'package:pqrsafinal/Usuarios/ui/AgregarUsuario/contenedorAgregarUsuario.dart';
 import 'package:pqrsafinal/Usuarios/ui/IngresoAlAplicativo/ResetearContrasenia.dart';
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/menuPrincipalPQRSA.dart';
 import 'package:pqrsafinal/Usuarios/ui/ManejoDeUsuarios/menuPrincipalUsuarios.dart';
@@ -26,9 +27,10 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         title: 'PQRSA',
         theme: ThemeData(fontFamily: 'OpenSans'),
-        initialRoute: "/menuPrincipalUsuarios",
+        initialRoute: "/crearUsuario",
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
+          "/crearUsuario": (BuildContext context) => new contenedorAgregarUsuario(),
           "/loginWeb": (BuildContext context) => new LoginWeb(),
           "/menuPrincipalPQRSA": (BuildContext context) => new menuPrincipalPQRSA(),
           "/verADetallePQRSA": (BuildContext context) => new verADetallePQRSA(),

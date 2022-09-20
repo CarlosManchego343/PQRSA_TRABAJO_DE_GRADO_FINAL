@@ -115,8 +115,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                   decoration: InputDecoration(
                                     filled: true,
                                     errorMaxLines: 2,
-                                    labelStyle:
-                                        TextStyle(color: Colores.black),
+                                    labelStyle: TextStyle(color: Colores.black),
                                     contentPadding: const EdgeInsets.only(
                                         top: 16.0, left: 10.0),
                                     border: OutlineInputBorder(

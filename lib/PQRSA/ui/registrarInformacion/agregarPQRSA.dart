@@ -39,13 +39,9 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     'Legal',
     'Finanzas',
     'Producción',
-    'GTH',
-    'Tierras',
     'Seguridad',
-    'HSE',
-    'Civil',
-    'Driling',
-    'Social'
+    'Social',
+    'Administración'
   ];
 
   TextEditingController? _numeroRadicacion;
