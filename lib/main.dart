@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         title: 'PQRSA',
         theme: ThemeData(fontFamily: 'OpenSans'),
-        initialRoute: "/crearUsuario",
+        initialRoute: "/menuPrincipalUsuarios",
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           "/crearUsuario": (BuildContext context) => new contenedorAgregarUsuario(),

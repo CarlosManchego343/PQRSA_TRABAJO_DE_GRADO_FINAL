@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +14,7 @@ class agregarUsuario extends StatefulWidget {
 class agregarUsuarioState extends State<agregarUsuario> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
+  final FirebaseAuth user = FirebaseAuth.instance;
 
   String _areaSeleccionada = 'Area';
 
@@ -53,9 +55,55 @@ class agregarUsuarioState extends State<agregarUsuario> {
     _contrasenia!.text = "";
   }
 
-  void _AgregarUsuario() {
+  static bool isEmail(String em) {
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = RegExp(p);
+    return regExp.hasMatch(em);
+  }
+
+  void _crearUsuario() async {
+    try {
+      UserCredential usuario = await user.createUserWithEmailAndPassword(
+          email: _correo!.text, password: _contrasenia!.text);
+      db.collection('Usuarios').doc(_numeroDeDocumento!.text).set({
+        "Area": _areaSeleccionada,
+        "Contraseña": _contrasenia!.text,
+        "Correo": _correo!.text,
+        "Nombre": _nombre!.text,
+        "Numero_de_documento": _numeroDeDocumento!.text,
+        "Rol": _rolSeleccionado
+      });
+      _limpiarCampos();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("La contraseña debe ser de al menos 6 caracteres")));
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("El email digitado ya esta en uso")));
+      }
+    }
+  }
+
+  void _agregarUsuario() {
     if (_formKey.currentState!.validate()) {
-      print('Asi es');
+      if (_areaSeleccionada != 'Area') {
+        if (_rolSeleccionado != 'Rol') {
+          if (isEmail(_correo!.text)) {
+            _crearUsuario();
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("El email digitado no es valido")));
+          }
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Por favor, elija un rol")));
+        }
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Por favor, elija un area")));
+      }
     }
   }
 
@@ -80,14 +128,14 @@ class agregarUsuarioState extends State<agregarUsuario> {
                                 right: 20.0,
                                 bottom: 10.0),
                             child: Input(
-                              placeholder: "Número de documento",
+                              placeholder: "Documento",
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
                               prefixIcon: Icon(Icons.pin_rounded),
                               controller: _numeroDeDocumento,
                               validator: (documento) {
                                 if (documento.isEmpty) {
-                                  return 'Por favor introduzca el número de documento';
+                                  return 'Introduzca el documento';
                                 }
                               },
                             ),
@@ -107,7 +155,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               controller: _correo,
                               validator: (correo) {
                                 if (correo.isEmpty) {
-                                  return 'Por favor introduzca el correo';
+                                  return 'Introduzca el correo';
                                 }
                               },
                             ),
@@ -190,7 +238,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               controller: _nombre,
                               validator: (nombre) {
                                 if (nombre.isEmpty) {
-                                  return 'Por favor introduzca el nombre';
+                                  return 'Introduzca el nombre';
                                 }
                               },
                             ),
@@ -210,7 +258,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               controller: _contrasenia,
                               validator: (contrasenia) {
                                 if (contrasenia.isEmpty) {
-                                  return 'Por favor introduzca la contraseña';
+                                  return 'Introduzca la contraseña';
                                 }
                               },
                             ),
@@ -279,7 +327,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
               ),
               SizedBox(height: 15),
               FlatButton(
-                onPressed: _AgregarUsuario,
+                onPressed: _agregarUsuario,
                 child: Text(
                   "Registrar",
                   style: TextStyle(color: Colores.black),

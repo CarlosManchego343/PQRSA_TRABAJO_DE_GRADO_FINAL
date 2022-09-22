@@ -13,26 +13,29 @@ class contenedorAgregarUsuarioState extends State<contenedorAgregarUsuario> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 500,
+        height: 400,
         width: 500,
         child: Card(
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: Column(
             children: <Widget>[
-              IconButton(onPressed: () {}, icon: Icon(Icons.cancel_sharp))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  IconButton(
+                    color: Colores.columnaCodigos,
+                    onPressed: () {}, 
+                    icon: Icon(Icons.cancel_sharp))
+                ],
+              ),
+              agregarUsuario()
             ],
           ),
-          agregarUsuario()
-        ],
-      ),
-      color: Colores.white,
-      shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colores.columnaCodigos),
-          borderRadius: BorderRadius.circular(5)),
-      margin: EdgeInsets.all(5),
-      elevation: 10,
-    ));
+          color: Colores.white,
+          shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colores.columnaCodigos),
+              borderRadius: BorderRadius.circular(5)),
+          margin: EdgeInsets.all(5),
+          elevation: 10,
+        ));
   }
 }

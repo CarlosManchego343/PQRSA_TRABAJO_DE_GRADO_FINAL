@@ -49,6 +49,13 @@ class _LoginWebState extends State<LoginWeb> {
     Navigator.pushNamed(context, '/resetearContrasenia');
   }
 
+  static bool isEmail(String em) {
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = RegExp(p);
+    return regExp.hasMatch(em);
+  }
+
   Future<void> _entrarConEmailYContrasenia() async {
     if (_formKey.currentState!.validate()) {
       if (isEmail(_email!.text)) {
@@ -71,13 +78,6 @@ class _LoginWebState extends State<LoginWeb> {
             SnackBar(content: Text("El email digitado no es valido")));
       }
     }
-  }
-
-  static bool isEmail(String em) {
-    String p =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = RegExp(p);
-    return regExp.hasMatch(em);
   }
 
   @override
@@ -157,8 +157,7 @@ class _LoginWebState extends State<LoginWeb> {
                                           Center(
                                             child: Text("Inicio de sesión",
                                                 style: TextStyle(
-                                                    color:
-                                                        Colores.black,
+                                                    color: Colores.black,
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 26)),
                                           ),
@@ -231,8 +230,8 @@ class _LoginWebState extends State<LoginWeb> {
                                                         bottom: 12),
                                                     child: Text("ACCEDER",
                                                         style: TextStyle(
-                                                            color: Colores
-                                                                .black,
+                                                            color:
+                                                                Colores.black,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                             fontSize: 16.0))),
