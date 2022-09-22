@@ -91,7 +91,19 @@ class agregarUsuarioState extends State<agregarUsuario> {
       if (_areaSeleccionada != 'Area') {
         if (_rolSeleccionado != 'Rol') {
           if (isEmail(_correo!.text)) {
-            _crearUsuario();
+            db
+                .collection('Usuarios')
+                .doc(_numeroDeDocumento!.text)
+                .get()
+                .then((sub) => {
+                      if (sub.exists)
+                        {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Ese usuario ya existe")))
+                        }
+                      else
+                        {_crearUsuario()}
+                    });
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("El email digitado no es valido")));
