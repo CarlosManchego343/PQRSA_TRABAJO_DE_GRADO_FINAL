@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
         initialRoute: "/menuPrincipalUsuarios",
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
-          "/crearUsuario": (BuildContext context) => new contenedorAgregarUsuario(),
           "/loginWeb": (BuildContext context) => new LoginWeb(),
           "/menuPrincipalPQRSA": (BuildContext context) => new menuPrincipalPQRSA(),
           "/verADetallePQRSA": (BuildContext context) => new verADetallePQRSA(),

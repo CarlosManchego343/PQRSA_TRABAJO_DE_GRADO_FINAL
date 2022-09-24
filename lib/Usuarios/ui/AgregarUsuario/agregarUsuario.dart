@@ -74,6 +74,8 @@ class agregarUsuarioState extends State<agregarUsuario> {
         "Numero_de_documento": _numeroDeDocumento!.text,
         "Rol": _rolSeleccionado
       });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Usuario almacenado con exito")));
       _limpiarCampos();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

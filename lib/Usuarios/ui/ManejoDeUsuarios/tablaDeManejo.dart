@@ -13,6 +13,25 @@ class tablaDeManejo extends StatefulWidget {
 }
 
 class tablaDeManejoState extends State<tablaDeManejo> {
+
+  double _opacidad = 0;
+
+  void _mostrarCardIngresarUsuario() {
+    setState(() {
+      if(_opacidad == 0) {
+        _opacidad = 1;
+      }
+    });
+  }
+
+  void _ocultarCardIngresarUsuario() {
+    setState(() {
+      if(_opacidad == 1) {
+        _opacidad = 0;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +47,7 @@ class tablaDeManejoState extends State<tablaDeManejo> {
                     FlatButton(
                         textColor: Colores.black,
                         color: Colores.Botones,
-                        onPressed: () {},
+                        onPressed: _mostrarCardIngresarUsuario,
                         child: Padding(
                             padding: EdgeInsets.only(
                                 left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -49,7 +68,7 @@ class tablaDeManejoState extends State<tablaDeManejo> {
             ),
             Align(
               alignment: Alignment.center,
-              child: contenedorAgregarUsuario(),
+              child: contenedorAgregarUsuario(_opacidad, _ocultarCardIngresarUsuario),
             )
           ],
         )),
