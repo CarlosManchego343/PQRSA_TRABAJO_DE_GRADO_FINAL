@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pqrsafinal/Usuarios/ui/AgregarUsuario/contenedorAgregarUsuario.dart';
 import 'package:pqrsafinal/Usuarios/ui/ColumnasTablaUsuarios/columnaConNumeroDeIdentificacion.dart';
 import 'package:pqrsafinal/Usuarios/ui/ColumnasTablaUsuarios/tablaDeUsuarios.dart';
+import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/contenededorEditaUsuario.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -30,6 +31,11 @@ class tablaDeManejoState extends State<tablaDeManejo> {
         _opacidad = 0;
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -69,7 +75,11 @@ class tablaDeManejoState extends State<tablaDeManejo> {
             Align(
               alignment: Alignment.center,
               child: contenedorAgregarUsuario(_opacidad, _ocultarCardIngresarUsuario),
-            )
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: contenedorEditarUsuario(0, (){}, '34f9337d-af64-44f2-8d2b-b6f427ee5846'),
+            ),
           ],
         )),
       ),

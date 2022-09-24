@@ -2,20 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../WidgetsGenerales/Theme.dart';
 import '../../../WidgetsGenerales/input.dart';
 
-class agregarUsuario extends StatefulWidget {
+class editarUsuario extends StatefulWidget {
+  final String? id;
+  editarUsuario({this.id});
   @override
-  agregarUsuarioState createState() => agregarUsuarioState();
+  editarUsuarioState createState() => editarUsuarioState();
 }
 
-class agregarUsuarioState extends State<agregarUsuario> {
+class editarUsuarioState extends State<editarUsuario> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
-  final FirebaseAuth user = FirebaseAuth.instance;
 
   String _areaSeleccionada = 'Area';
 
@@ -35,25 +35,32 @@ class agregarUsuarioState extends State<agregarUsuario> {
 
   TextEditingController? _numeroDeDocumento;
   TextEditingController? _nombre;
-  TextEditingController? _correo;
-  TextEditingController? _contrasenia;
+
+  late Map? usuarioEncontrado;
+
+  late String? usuarioAEditar;
 
   @override
   void initState() {
     super.initState();
-    _numeroDeDocumento = TextEditingController(text: "");
+    usuarioAEditar = widget.id;
     _nombre = TextEditingController(text: "");
-    _correo = TextEditingController(text: "");
-    _contrasenia = TextEditingController(text: "");
-  }
-
-  void _limpiarCampos() {
-    _rolSeleccionado = "Rol";
-    _areaSeleccionada = "Area";
-    _numeroDeDocumento!.text = "";
-    _nombre!.text = "";
-    _correo!.text = "";
-    _contrasenia!.text = "";
+    db
+        .collection('Usuarios')
+        .where('uid', isEqualTo: usuarioAEditar)
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                usuarioEncontrado = snapshot.docs[0].data() as Map?;
+                print(usuarioEncontrado);
+                print("El id es: " + usuarioAEditar!);
+                _numeroDeDocumento =
+                    TextEditingController(text: usuarioEncontrado!["Numero_de_documento"]);
+                _nombre = TextEditingController(text: usuarioEncontrado!["Nombre"]);
+                _areaSeleccionada = usuarioEncontrado!["Area"];
+                _rolSeleccionado = usuarioEncontrado!["Rol"];
+              })
+            });
   }
 
   static bool isEmail(String em) {
@@ -63,55 +70,18 @@ class agregarUsuarioState extends State<agregarUsuario> {
     return regExp.hasMatch(em);
   }
 
-  void _crearUsuario() async {
-    try {
-      UserCredential usuario = await user.createUserWithEmailAndPassword(
-          email: _correo!.text, password: _contrasenia!.text);
-      final id = Uuid().v4();
-      db.collection('Usuarios').doc(id).set({
-        "uid": id,
-        "Area": _areaSeleccionada,
-        "Correo": _correo!.text,
-        "Nombre": _nombre!.text,
-        "Numero_de_documento": _numeroDeDocumento!.text,
-        "Rol": _rolSeleccionado
-      });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Usuario almacenado con exito")));
-      _limpiarCampos();
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("La contraseña debe ser de al menos 6 caracteres")));
-      } else if (e.code == 'email-already-in-use') {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("El email digitado ya esta en uso")));
-      }
-    }
-  }
-
-  void _agregarUsuario() {
+  void _editarUsuario() {
     if (_formKey.currentState!.validate()) {
       if (_areaSeleccionada != 'Area') {
         if (_rolSeleccionado != 'Rol') {
-          if (isEmail(_correo!.text)) {
-            db
-                .collection('Usuarios')
-                .doc(_numeroDeDocumento!.text)
-                .get()
-                .then((sub) => {
-                      if (sub.exists)
-                        {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Ese usuario ya existe")))
-                        }
-                      else
-                        {_crearUsuario()}
-                    });
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("El email digitado no es valido")));
-          }
+          db.collection('Usuarios').doc(usuarioAEditar).update({
+            "Area": _areaSeleccionada,
+            "Nombre": _nombre!.text,
+            "Numero_de_documento": _numeroDeDocumento!.text,
+            "Rol": _rolSeleccionado
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Usuario editado con exito")));
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("Por favor, elija un rol")));
@@ -152,26 +122,6 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               validator: (documento) {
                                 if (documento.isEmpty) {
                                   return 'Introduzca el documento';
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Input(
-                              placeholder: "Correo electronico",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.email_rounded),
-                              controller: _correo,
-                              validator: (correo) {
-                                if (correo.isEmpty) {
-                                  return 'Introduzca el correo';
                                 }
                               },
                             ),
@@ -266,26 +216,6 @@ class agregarUsuarioState extends State<agregarUsuario> {
                                 left: 20.0,
                                 right: 20.0,
                                 bottom: 10.0),
-                            child: Input(
-                              placeholder: "Contraseña",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.directions_rounded),
-                              controller: _contrasenia,
-                              validator: (contrasenia) {
-                                if (contrasenia.isEmpty) {
-                                  return 'Introduzca la contraseña';
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
                             child: Container(
                               child: DropdownButtonFormField<String>(
                                 hint: Text('Municipio'),
@@ -343,9 +273,9 @@ class agregarUsuarioState extends State<agregarUsuario> {
               ),
               SizedBox(height: 15),
               FlatButton(
-                onPressed: _agregarUsuario,
+                onPressed: _editarUsuario,
                 child: Text(
-                  "Registrar",
+                  "Editar",
                   style: TextStyle(color: Colores.black),
                 ),
                 color: Colores.Botones,

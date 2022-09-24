@@ -1,7 +1,10 @@
 // ignore_for_file: unnecessary_new, prefer_const_constructors, camel_case_types, use_key_in_widget_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/editarUsuario.dart';
+import 'package:pqrsafinal/Usuarios/ui/ManejoDeUsuarios/tablaDeManejo.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -10,55 +13,71 @@ class tablaDeUsuarios extends StatefulWidget {
   tablaDeUsuariosState createState() => tablaDeUsuariosState();
 }
 
-List<DataRow> _crearFilas(QuerySnapshot snapshot) {
-    List<DataRow> newList =
-        snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-      return new DataRow(cells: [
-        DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Nombre'),
-        ))),
-        DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Correo'),
-        ))),
-        DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Area'),
-          textAlign: TextAlign.center,
-        ))),
-        DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Rol'),
-          textAlign: TextAlign.center,
-        ))),
-        DataCell(FlatButton(
-          onPressed: () {},
-          child: Text(
-            "Editar",
-            style: TextStyle(color: Colores.black),
-            textAlign: TextAlign.center,
-          ),
-          color: Colores.Botones,
-        )),
-        DataCell(FlatButton(
-          onPressed: () {},
-          child: Text(
-            "Eliminar",
-            style: TextStyle(color: Colores.black),
-            textAlign: TextAlign.center,
-          ),
-          color: Colores.Botones,
-        ))
-      ]);
-    }).toList();
-
-    return newList;
-  }
 
 
 class tablaDeUsuariosState extends State<tablaDeUsuarios> {
+
+  double _opacidad = 0;
+
+  String? id = '';
+
   final ScrollController _scrollController = ScrollController();
+
+  void _mostrarCardEditarUsuario() {
+    setState(() {
+      _opacidad == 0 ? 1: 0;
+    });
+  }
+
+  List<DataRow> _crearFilas(QuerySnapshot snapshot) {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  List<DataRow> newList =
+      snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+    return new DataRow(cells: [
+      DataCell(Center(
+          child: Text(
+        documentSnapshot.get('Nombre'),
+      ))),
+      DataCell(Center(
+          child: Text(
+        documentSnapshot.get('Correo'),
+      ))),
+      DataCell(Center(
+          child: Text(
+        documentSnapshot.get('Area'),
+        textAlign: TextAlign.center,
+      ))),
+      DataCell(Center(
+          child: Text(
+        documentSnapshot.get('Rol'),
+        textAlign: TextAlign.center,
+      ))),
+      DataCell(FlatButton(
+        onPressed: () {},
+        child: Text(
+          "Editar",
+          style: TextStyle(color: Colores.black),
+          textAlign: TextAlign.center,
+        ),
+        color: Colores.Botones,
+      )),
+      DataCell(FlatButton(
+        onPressed: () {
+          db.collection('Usuarios').doc(documentSnapshot.id).delete();
+        },
+        child: Text(
+          "Eliminar",
+          style: TextStyle(color: Colores.black),
+          textAlign: TextAlign.center,
+        ),
+        color: Colores.Botones,
+      ))
+    ]);
+  }).toList();
+  return newList;
+}
+
 
   @override
   Widget build(BuildContext context) {

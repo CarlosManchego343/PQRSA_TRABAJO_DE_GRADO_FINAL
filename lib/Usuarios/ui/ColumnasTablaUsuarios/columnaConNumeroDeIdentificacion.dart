@@ -16,7 +16,7 @@ List<DataRow> _crearFilas(QuerySnapshot snapshot) {
     return new DataRow(cells: [
       DataCell(Center(
           child: Text(
-        documentSnapshot.id,
+        documentSnapshot.get('Numero_de_documento')
       ))),
     ]);
   }).toList();
