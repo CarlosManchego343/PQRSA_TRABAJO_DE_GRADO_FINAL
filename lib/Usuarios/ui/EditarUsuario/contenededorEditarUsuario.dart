@@ -4,18 +4,18 @@ import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/editarUsuario.dart';
 import '../../../WidgetsGenerales/Theme.dart';
 
 class contenedorEditarUsuario extends StatelessWidget {
-
   final double opacidad;
 
   final Function ocultarContenedor;
 
   final String? id;
 
-  contenedorEditarUsuario( this.opacidad, this.ocultarContenedor, this.id);
+  contenedorEditarUsuario(this.opacidad, this.ocultarContenedor, this.id);
+
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      duration: Duration( milliseconds: 600),
+      duration: Duration(milliseconds: 600),
       curve: Curves.easeOut,
       opacity: opacidad,
       child: Container(
@@ -33,7 +33,7 @@ class contenedorEditarUsuario extends StatelessWidget {
                         icon: Icon(Icons.cancel_sharp))
                   ],
                 ),
-                editarUsuario(id: id)
+                editarUsuario(id: id!)
               ],
             ),
             color: Colores.white,

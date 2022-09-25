@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
@@ -19,12 +20,15 @@ class LoginWeb extends StatefulWidget {
 }
 
 class _LoginWebState extends State<LoginWeb> {
+  final FirebaseFirestore db = FirebaseFirestore.instance;
   final FirebaseAuth _autenticacion = FirebaseAuth.instance;
   final double height = window.physicalSize.height;
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController? _email;
   TextEditingController? _contrasenia;
+
+  late Map? usuarioEntrando;
 
   @override
   void initState() {
@@ -41,7 +45,21 @@ class _LoginWebState extends State<LoginWeb> {
 
   void _entrar() {
     ClearTextEditingController();
-    Navigator.pushNamed(context, '/principalWeb');
+    db
+        .collection("Usuarios")
+        .where("Correo", isEqualTo: _email!.text)
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                usuarioEntrando = snapshot.docs[0].data() as Map?;
+              }),
+              if (usuarioEntrando!["Rol"] == "Administrador")
+                {
+                  Navigator.pushNamed(context, '/menuPrincipalUsuarios')
+                }
+              else
+                {Navigator.pushNamed(context, '/principalWeb')}
+            });
   }
 
   void _resetarContrasenia() {

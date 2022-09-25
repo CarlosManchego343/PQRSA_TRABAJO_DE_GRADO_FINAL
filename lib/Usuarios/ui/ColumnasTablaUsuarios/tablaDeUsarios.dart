@@ -3,16 +3,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/editarUsuario.dart';
-import 'package:pqrsafinal/Usuarios/ui/ManejoDeUsuarios/tablaDeManejo.dart';
-
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class tablaDeUsuarios extends StatefulWidget {
   @override
   tablaDeUsuariosState createState() => tablaDeUsuariosState();
 }
-
 
 
 class tablaDeUsuariosState extends State<tablaDeUsuarios> {
@@ -63,8 +59,11 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
         color: Colores.Botones,
       )),
       DataCell(FlatButton(
-        onPressed: () {
-          db.collection('Usuarios').doc(documentSnapshot.id).delete();
+        onPressed: () async{
+          await AuthService().deleteUser(documentSnapshot.get('Correo'), documentSnapshot.get('Contrasenia'));
+          await db.collection("Usuarios").doc(documentSnapshot.id).delete;
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Usuario eliminado con exito")));
         },
         child: Text(
           "Eliminar",
@@ -132,5 +131,37 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
                     );
                   }))),
     );
+  }
+}
+
+class AuthService {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+Future deleteUser(String email, String password) async {
+    try {
+      User user = await _auth.currentUser!;
+      AuthCredential credentials =
+          EmailAuthProvider.credential(email: email, password: password);
+      UserCredential result = await user.reauthenticateWithCredential(credentials);
+      await DatabaseService(uid: result.user!.uid).deleteuser(); // called from database class
+      await result.user!.delete();
+      return true;
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class DatabaseService {
+  final String? uid;
+
+  DatabaseService({this.uid});
+
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('Usuarios');
+
+  Future deleteuser() {
+    return userCollection.doc(uid).delete();
   }
 }

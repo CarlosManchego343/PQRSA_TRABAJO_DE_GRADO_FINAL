@@ -67,17 +67,19 @@ class agregarUsuarioState extends State<agregarUsuario> {
     try {
       UserCredential usuario = await user.createUserWithEmailAndPassword(
           email: _correo!.text, password: _contrasenia!.text);
-      final id = Uuid().v4();
+      User? usuarioID = user.currentUser;
+      final id = await usuarioID!.uid;
       db.collection('Usuarios').doc(id).set({
         "uid": id,
         "Area": _areaSeleccionada,
         "Correo": _correo!.text,
         "Nombre": _nombre!.text,
+        "Contrasenia": _contrasenia!.text,
         "Numero_de_documento": _numeroDeDocumento!.text,
         "Rol": _rolSeleccionado
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Usuario almacenado con exito")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Usuario almacenado con exito")));
       _limpiarCampos();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -95,19 +97,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
       if (_areaSeleccionada != 'Area') {
         if (_rolSeleccionado != 'Rol') {
           if (isEmail(_correo!.text)) {
-            db
-                .collection('Usuarios')
-                .doc(_numeroDeDocumento!.text)
-                .get()
-                .then((sub) => {
-                      if (sub.exists)
-                        {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Ese usuario ya existe")))
-                        }
-                      else
-                        {_crearUsuario()}
-                    });
+            _crearUsuario();
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("El email digitado no es valido")));
@@ -145,8 +135,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                                 bottom: 10.0),
                             child: Input(
                               placeholder: "Documento",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
+                              inputFormatter: FilteringTextInputFormatter.digitsOnly,
                               prefixIcon: Icon(Icons.pin_rounded),
                               controller: _numeroDeDocumento,
                               validator: (documento) {
@@ -250,7 +239,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               placeholder: "Nombre",
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.directions_rounded),
+                              prefixIcon: Icon(Icons.account_circle_rounded),
                               controller: _nombre,
                               validator: (nombre) {
                                 if (nombre.isEmpty) {
@@ -270,7 +259,7 @@ class agregarUsuarioState extends State<agregarUsuario> {
                               placeholder: "Contraseña",
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.directions_rounded),
+                              prefixIcon: Icon(Icons.lock),
                               controller: _contrasenia,
                               validator: (contrasenia) {
                                 if (contrasenia.isEmpty) {

@@ -45,15 +45,16 @@ class editarUsuarioState extends State<editarUsuario> {
     super.initState();
     usuarioAEditar = widget.id;
     _nombre = TextEditingController(text: "");
-    db
+    if(usuarioAEditar != '') {
+      db
         .collection('Usuarios')
         .where('uid', isEqualTo: usuarioAEditar)
         .get()
         .then((QuerySnapshot snapshot) => {
               setState(() {
                 usuarioEncontrado = snapshot.docs[0].data() as Map?;
-                print(usuarioEncontrado);
-                print("El id es: " + usuarioAEditar!);
+                // print(usuarioEncontrado);
+                // print("El id es: " + usuarioAEditar!);
                 _numeroDeDocumento =
                     TextEditingController(text: usuarioEncontrado!["Numero_de_documento"]);
                 _nombre = TextEditingController(text: usuarioEncontrado!["Nombre"]);
@@ -61,6 +62,7 @@ class editarUsuarioState extends State<editarUsuario> {
                 _rolSeleccionado = usuarioEncontrado!["Rol"];
               })
             });
+    }
   }
 
   static bool isEmail(String em) {
