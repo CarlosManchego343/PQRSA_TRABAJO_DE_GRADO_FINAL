@@ -32,14 +32,14 @@ class menuPrincipalPQRSAState extends State<menuPrincipalPQRSA> with TickerProvi
         automaticallyImplyLeading: false,
         backgroundColor: Colores.bgCabeceraPrincipal,
         actions: <Widget>[
-          FlatButton(
+          IconButton(
             onPressed: salir, 
-            child: Text('Cerrar sesión',
-            style: TextStyle(
-              color: Colores.black,
-              fontSize: 20
+            icon: Icon(
+              Icons.exit_to_app_rounded,
+              color: Colores.botonIconos,
             ),
-            ))
+            iconSize: 100,
+            ), 
         ],
         bottom: TabBar(
           indicatorColor: Colores.bgTapElejido,

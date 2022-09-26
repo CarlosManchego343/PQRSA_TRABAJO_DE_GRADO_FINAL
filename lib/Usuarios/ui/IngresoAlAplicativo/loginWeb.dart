@@ -30,6 +30,8 @@ class _LoginWebState extends State<LoginWeb> {
 
   late Map? usuarioEntrando;
 
+  late String? usuarioID;
+
   @override
   void initState() {
     super.initState();
@@ -43,11 +45,13 @@ class _LoginWebState extends State<LoginWeb> {
     _contrasenia!.text = "";
   }
 
-  void _entrar() {
+  void _entrar() async {
+    User? usuariollegando = _autenticacion.currentUser;
+    String? usuarioID = await usuariollegando!.uid;
     ClearTextEditingController();
     db
         .collection("Usuarios")
-        .where("Correo", isEqualTo: _email!.text)
+        .where('uid', isEqualTo: usuarioID)
         .get()
         .then((QuerySnapshot snapshot) => {
               setState(() {
@@ -58,7 +62,9 @@ class _LoginWebState extends State<LoginWeb> {
                   Navigator.pushNamed(context, '/menuPrincipalUsuarios')
                 }
               else
-                {Navigator.pushNamed(context, '/principalWeb')}
+                {
+                  Navigator.pushNamed(context, '/menuPrincipalPQRSA')
+                }
             });
   }
 
