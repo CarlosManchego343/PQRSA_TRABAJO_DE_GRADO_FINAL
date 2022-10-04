@@ -5,6 +5,7 @@ import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:pqrsafinal/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class agregarClientePQRS extends StatefulWidget {
   @override
@@ -17,13 +18,14 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
 
   String _municipioSeleccionado = 'Municipio de residencia';
 
-  List _municipio = ['Municipio de residencia', 'Aracataca', 'Pueblo viejo'];
+  List _municipio = ['Municipio de residencia', 'Cota', 'Chia', 'Cajica', 'Tenjo'];
 
   TextEditingController? _nombreCliente;
   TextEditingController? _documentoCliente;
   TextEditingController? _telefono;
   TextEditingController? _correo;
   TextEditingController? _direccion;
+
 
   @override
   void initState() {
@@ -37,7 +39,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
 
   _limpiarCampos() {
     _municipioSeleccionado = "Municipio de residencia";
-    _municipio = ['Municipio de residencia', 'Aracataca', 'Pueblo viejo'];
+    _municipio = ['Municipio de residencia', 'Cota', 'Chia', 'Cajica', 'Tenjo'];
     _nombreCliente!.text = "";
     _documentoCliente!.text = "";
     _telefono!.text = "";
@@ -48,7 +50,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
   void _AgregarCliente() {
     if (_formKey.currentState!.validate()) {
       if (_municipioSeleccionado != 'Municipio de residencia') {
-        db.collection('Cliente').doc(_documentoCliente!.text).set({
+        db.collection('Cliente').doc(Uuid().v4()).set({
           "Correo_electronico": _correo!.text,
           "Direccion": _direccion!.text,
           "Municipio_de_residencia": _municipioSeleccionado,
@@ -91,10 +93,9 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                   bottom: 10.0),
                               child: Input(
                                 placeholder: "Número de documento",
-                                inputFormatter:
-                                    FilteringTextInputFormatter.deny(""),
                                 prefixIcon: Icon(Icons.pin_rounded),
                                 controller: _documentoCliente,
+                                inputFormatter: FilteringTextInputFormatter.digitsOnly,
                                 validator: (documento) {
                                   if (documento.isEmpty) {
                                     return 'Por favor introduzca el numero de documento';

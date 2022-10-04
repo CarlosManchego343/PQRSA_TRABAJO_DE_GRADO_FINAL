@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/PQRSA/ui/ColumnasTablaPQRSAActivas/tablaDePQRSA.dart';
 import 'package:pqrsafinal/Usuarios/ui/AgregarUsuario/contenedorAgregarUsuario.dart';
 import 'package:pqrsafinal/Usuarios/ui/ColumnasTablaUsuarios/columnaConNumeroDeIdentificacion.dart';
 import 'package:pqrsafinal/Usuarios/ui/ColumnasTablaUsuarios/tablaDeUsarios.dart';
@@ -14,6 +15,7 @@ class tablaDeManejo extends StatefulWidget {
 }
 
 class tablaDeManejoState extends State<tablaDeManejo> {
+  
   double _opacidad = 0;
 
   void _mostrarCardIngresarUsuario() {
@@ -81,10 +83,6 @@ class tablaDeManejoState extends State<tablaDeManejo> {
               child: contenedorAgregarUsuario(
                   _opacidad, _ocultarCardIngresarUsuario),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: contenedorEditarUsuario(0, () {}, ''),
-            ),
           ],
         )),
       ),
@@ -93,6 +91,7 @@ class tablaDeManejoState extends State<tablaDeManejo> {
 }
 
 class mostrarCardUsuario extends StatelessWidget {
+
   final double? _opacidad;
 
   final Function? _ocultarCardEditarUsuario;

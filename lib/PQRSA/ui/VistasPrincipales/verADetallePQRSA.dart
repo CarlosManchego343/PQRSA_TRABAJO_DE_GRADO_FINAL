@@ -15,7 +15,7 @@ class verADetallePQRSA extends StatefulWidget {
 
 class verADetallePQRSAState extends State<verADetallePQRSA> {
   void volverAPrincipal() {
-    Navigator.pushNamed(context, '/principalWeb');
+    Navigator.pushNamed(context, '/menuPrincipalPQRSA');
   }
 
   @override

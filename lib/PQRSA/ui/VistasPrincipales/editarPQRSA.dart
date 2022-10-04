@@ -42,7 +42,7 @@ class editarPQRSAState extends State<editarPQRSA> {
   void AlmacenarPQRSA() {}
 
   void volverAPrincipal() {
-    Navigator.pushNamed(context, '/principalWeb');
+    Navigator.pushNamed(context, '/menuPrincipalPQRSA');
   }
 
   @override

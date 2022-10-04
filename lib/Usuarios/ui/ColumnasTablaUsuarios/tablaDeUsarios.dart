@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/contenededorEditarUsuario.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class tablaDeUsuarios extends StatefulWidget {
@@ -15,13 +16,21 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
 
   double _opacidad = 0;
 
-  String? id = '';
-
   final ScrollController _scrollController = ScrollController();
 
   void _mostrarCardEditarUsuario() {
     setState(() {
-      _opacidad == 0 ? 1: 0;
+      if (_opacidad == 0) {
+        _opacidad = 1;
+      }
+    });
+  }
+
+  void _ocultarCardEditarUsuario() {
+    setState(() {
+      if (_opacidad == 1) {
+        _opacidad = 0;
+      }
     });
   }
 
@@ -49,15 +58,6 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
         documentSnapshot.get('Rol'),
         textAlign: TextAlign.center,
       ))),
-      DataCell(FlatButton(
-        onPressed: () {},
-        child: Text(
-          "Editar",
-          style: TextStyle(color: Colores.black),
-          textAlign: TextAlign.center,
-        ),
-        color: Colores.Botones,
-      )),
       DataCell(FlatButton(
         onPressed: () async{
           await AuthService().deleteUser(documentSnapshot.get('Correo'), documentSnapshot.get('Contrasenia'));
@@ -119,10 +119,6 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
                                     style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
-                                child: Text('Editar',
-                                    style: TextStyle(color: Colores.white)))),
-                        new DataColumn(
-                            label: Center(
                                 child: Text('Eliminar',
                                     style: TextStyle(color: Colores.white)))),
                       ],
@@ -165,3 +161,6 @@ class DatabaseService {
     return userCollection.doc(uid).delete();
   }
 }
+
+
+

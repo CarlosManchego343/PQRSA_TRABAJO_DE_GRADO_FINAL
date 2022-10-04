@@ -41,16 +41,6 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
         ))),
         DataCell(Center(
             child: Text(
-          documentSnapshot.get('Bloque'),
-          textAlign: TextAlign.center,
-        ))),
-        DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Dirijido_a'),
-          textAlign: TextAlign.center,
-        ))),
-        DataCell(Center(
-            child: Text(
           documentSnapshot.get('Documento_del_cliente'),
           textAlign: TextAlign.center,
         ))),
@@ -119,16 +109,6 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
                         new DataColumn(
                             label: Center(
                                 child: Text('Area',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
-                        new DataColumn(
-                            label: Center(
-                                child: Text('Bloque',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
-                        new DataColumn(
-                            label: Center(
-                                child: Text('Dirijido a',
                                     style:
                                         TextStyle(color: Colores.white)))),
                         new DataColumn(

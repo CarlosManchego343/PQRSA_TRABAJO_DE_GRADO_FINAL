@@ -5,6 +5,7 @@ import 'package:pqrsafinal/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uuid/uuid.dart';
 
 class agregarPQRSA extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class agregarPQRSA extends StatefulWidget {
 }
 
 class agregarPQRSAtate extends State<agregarPQRSA> {
-  
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -43,9 +43,6 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     'Social',
     'Administración'
   ];
-
-  TextEditingController? _numeroRadicacion;
-  TextEditingController? _dirjidaA;
   TextEditingController? _asunto;
   TextEditingController? _fechaRadicacion;
   TextEditingController? _documentoDelRecibidor;
@@ -54,8 +51,6 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   @override
   void initState() {
     super.initState();
-    _numeroRadicacion = TextEditingController(text: "");
-    _dirjidaA = TextEditingController(text: "");
     _asunto = TextEditingController(text: "");
     _fechaRadicacion = TextEditingController(text: "");
     _documentoDelRecibidor = TextEditingController(text: "");
@@ -63,11 +58,10 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   }
 
   void _limpiarCampos() {
-    _tipoSeleccionado = "Tipo de PQRSA";
-    _bloqueSeleccionado = "Bloque";
-    _areaSeleccionada = "Area";
-    _numeroRadicacion!.text = "";
-    _dirjidaA!.text = "";
+    setState(() {
+      _tipoSeleccionado = "Tipo de PQRSA";
+      _areaSeleccionada = "Area";
+    });
     _asunto!.text = "";
     _fechaRadicacion!.text = "";
     _documentoDelRecibidor!.text = "";
@@ -77,39 +71,39 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   void _agregarPQRSA() {
     if (_formKey.currentState!.validate()) {
       if (_tipoSeleccionado != 'Tipo de PQRSA') {
-        if (_bloqueSeleccionado != 'Bloque') {
-          if (_areaSeleccionada != 'Area') {
-            db
-                .collection('Cliente')
-                .doc(_documentoDelCliente!.text)
-                .get()
-                .then((sub) {
-              if (sub.exists) {
-                db.collection('PQRSA').doc(_numeroRadicacion!.text).set({
-                  "Area": _areaSeleccionada,
-                  "Bloque": _bloqueSeleccionado,
-                  "Dirijido_a": _dirjidaA!.text,
-                  "Documento_del_cliente": _documentoDelCliente!.text,
-                  "Documento_del_recibidor": _documentoDelRecibidor!.text,
-                  "Fecha_de_radicacion": _fechaRadicacion!.text,
-                  "Numero_de_radicacion": _numeroRadicacion!.text,
-                  "Tipo_de_pqrsa": _tipoSeleccionado
-                });
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("Información registrada correctamente")));
-                _limpiarCampos();
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("El cliente no existe")));
-              }
-            });
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Por favor, elija una area")));
-          }
+        if (_areaSeleccionada != 'Area') {
+          DocumentSnapshot documento;
+          db
+              .collection('Cliente')
+              .where('Numero_de_documento',
+                  isEqualTo: _documentoDelCliente!.text)
+              .get()
+              .then((sub) => {
+                    if (sub.docs.isNotEmpty)
+                      {
+                        db.collection('PQRSA').doc(Uuid().v1()).set({
+                          "Area": _areaSeleccionada,
+                          "Documento_del_cliente": _documentoDelCliente!.text,
+                          "Documento_del_recibidor":
+                              _documentoDelRecibidor!.text,
+                          "Fecha_de_radicacion": _fechaRadicacion!.text,
+                          "Asunto": _asunto!.text,
+                          "Tipo_de_pqrsa": _tipoSeleccionado
+                        }),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("Información registrada correctamente"))),
+                        _limpiarCampos()
+                      }
+                    else
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Este cliente no existe")))
+                      }
+                  });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Por favor, elija un bloque")));
+              SnackBar(content: Text("Por favor, elija una area")));
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -135,6 +129,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                       flex: 2,
                       child: Column(
                         children: [
+                          SizedBox(height: 15),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10.0,
@@ -142,14 +137,14 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 right: 20.0,
                                 bottom: 10.0),
                             child: Input(
-                              placeholder: "Fecha de radicación",
+                              placeholder: "Asunto",
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.date_range_rounded),
-                              controller: _fechaRadicacion,
-                              validator: (fecha) {
-                                if (fecha.isEmpty) {
-                                  return 'Por favor introduzca la fecha de radicación';
+                              prefixIcon: Icon(Icons.article_outlined),
+                              controller: _asunto,
+                              validator: (Asunto) {
+                                if (Asunto.isEmpty) {
+                                  return 'Por favor introduzca el asunto de la PQRSA';
                                 }
                               },
                             ),
@@ -167,8 +162,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   errorMaxLines: 2,
-                                  labelStyle:
-                                      TextStyle(color: Colores.black),
+                                  labelStyle: TextStyle(color: Colores.black),
                                   contentPadding: const EdgeInsets.only(
                                       top: 16.0, left: 10.0),
                                   border: OutlineInputBorder(
@@ -222,91 +216,11 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 bottom: 10.0),
                             child: Container(
                               child: DropdownButtonFormField<String>(
-                                hint: Text('Bloque'),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  errorMaxLines: 2,
-                                  labelStyle:
-                                      TextStyle(color: Colores.black),
-                                  contentPadding: const EdgeInsets.only(
-                                      top: 16.0, left: 10.0),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .focusColor
-                                          .withOpacity(0.2),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .focusColor
-                                          .withOpacity(0.5),
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colores.BordeDeInputs,
-                                    ),
-                                  ),
-                                ),
-                                value: _bloqueSeleccionado,
-                                icon: const Icon(Icons.arrow_drop_down_sharp),
-                                iconSize: 28,
-                                elevation: 16,
-                                style: Theme.of(context).textTheme.bodyText1,
-                                onChanged: (String? newValue) {
-                                  if (newValue != null) {
-                                    setState(() {
-                                      _bloqueSeleccionado = newValue;
-                                    });
-                                  }
-                                },
-                                items: _bloque
-                                    .map<DropdownMenuItem<String>>((value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Input(
-                              placeholder: "Asunto",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.article_outlined),
-                              controller: _asunto,
-                              validator: (Asunto) {
-                                if (Asunto.isEmpty) {
-                                  return 'Por favor introduzca el asunto de la PQRSA';
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Container(
-                              child: DropdownButtonFormField<String>(
                                 hint: Text('Area'),
                                 decoration: InputDecoration(
                                   filled: true,
                                   errorMaxLines: 2,
-                                  labelStyle:
-                                      TextStyle(color: Colores.black),
+                                  labelStyle: TextStyle(color: Colores.black),
                                   contentPadding: const EdgeInsets.only(
                                       top: 16.0, left: 10.0),
                                   border: OutlineInputBorder(
@@ -357,6 +271,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                       flex: 2,
                       child: Column(
                         children: [
+                          SizedBox(height: 15),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10.0,
@@ -364,34 +279,14 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 right: 20.0,
                                 bottom: 10.0),
                             child: Input(
-                              placeholder: "Número de radicado",
+                              placeholder: "Fecha de radicación",
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.fiber_pin_rounded),
-                              controller: _numeroRadicacion,
-                              validator: (numeroRadicado) {
-                                if (numeroRadicado.isEmpty) {
-                                  return 'Por favor introduzca el número de radicado';
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 18.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Input(
-                              placeholder: "Dirijido a",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.person),
-                              controller: _dirjidaA,
-                              validator: (DirijidoA) {
-                                if (DirijidoA.isEmpty) {
-                                  return 'Por favor introduzca el nombre de la persona a quien se dirije la PQRSA';
+                              prefixIcon: Icon(Icons.date_range_rounded),
+                              controller: _fechaRadicacion,
+                              validator: (fecha) {
+                                if (fecha.isEmpty) {
+                                  return 'Por favor introduzca la fecha de radicación';
                                 }
                               },
                             ),
@@ -406,7 +301,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                             child: Input(
                               placeholder: "Documento del radicado",
                               inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
+                                  FilteringTextInputFormatter.digitsOnly,
                               prefixIcon: Icon(Icons.pin),
                               controller: _documentoDelCliente,
                               validator: (documentoC) {
@@ -426,7 +321,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                             child: Input(
                               placeholder: "Documento del recibidor",
                               inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
+                                  FilteringTextInputFormatter.digitsOnly,
                               prefixIcon: Icon(Icons.pin),
                               controller: _documentoDelRecibidor,
                               validator: (documentoE) {
