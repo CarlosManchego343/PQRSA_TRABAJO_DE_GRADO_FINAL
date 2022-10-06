@@ -17,7 +17,6 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _tipoSeleccionado = 'Tipo de PQRSA';
-  String _bloqueSeleccionado = 'Bloque';
   String _areaSeleccionada = 'Area';
 
   // ignore: prefer_final_fields
@@ -30,8 +29,6 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     'Agradecimiento'
   ];
 
-  // ignore: prefer_final_fields
-  List _bloque = ['Bloque', 'Vallemedio', 'Carbonera'];
 
   // ignore: prefer_final_fields
   List _area = [
@@ -55,6 +52,29 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     _fechaRadicacion = TextEditingController(text: "");
     _documentoDelRecibidor = TextEditingController(text: "");
     _documentoDelCliente = TextEditingController(text: "");
+  }
+
+  void CallDatePicker() async {
+    var _date = await getDatePickerWidget();
+    String _dateFormatted = DateFormat('dd-MM-yyyy').format(_date);
+    setState(() {
+      _fechaNacimiento.text = _dateFormatted;
+      calcular();
+      caracter.fechaNacimiento = _date;
+    });
+  }
+
+
+  Future<DateTime> getDatePickerWidget() {
+    return showDatePicker(
+      context: context,
+      initialDate: DateTime(2000),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(data: ThemeData.dark(), child: child);
+      },
+    );
   }
 
   void _limpiarCampos() {
@@ -90,6 +110,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                               _documentoDelRecibidor!.text,
                           "Fecha_de_radicacion": _fechaRadicacion!.text,
                           "Asunto": _asunto!.text,
+                          "Estado": "Abierta",
                           "Tipo_de_pqrsa": _tipoSeleccionado
                         }),
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

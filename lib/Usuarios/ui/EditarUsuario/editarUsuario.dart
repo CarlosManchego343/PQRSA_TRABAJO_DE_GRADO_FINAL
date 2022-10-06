@@ -44,7 +44,6 @@ class editarUsuarioState extends State<editarUsuario> {
   void initState() {
     super.initState();
     usuarioAEditar = widget.id;
-    _nombre = TextEditingController(text: "");
       db
         .collection('Usuarios')
         .where('uid', isEqualTo: usuarioAEditar)
@@ -52,8 +51,6 @@ class editarUsuarioState extends State<editarUsuario> {
         .then((QuerySnapshot snapshot) => {
               setState(() {
                 usuarioEncontrado = snapshot.docs[0].data() as Map?;
-                print(usuarioEncontrado);
-                print("El id es: " + usuarioAEditar!);
                 _numeroDeDocumento =
                     TextEditingController(text: usuarioEncontrado!["Numero_de_documento"]);
                 _nombre = TextEditingController(text: usuarioEncontrado!["Nombre"]);

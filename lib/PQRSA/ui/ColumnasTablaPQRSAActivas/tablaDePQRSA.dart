@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_new, prefer_const_constructors
 
+import 'package:pqrsafinal/PQRSA/ui/EditarPQRSA/contenedorEditarPQRSA.dart';
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/verADetallePQRSA.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,6 @@ class tablaDePQRSA extends StatefulWidget {
 
 class tablaDePQRSAState extends State<tablaDePQRSA> {
   final ScrollController _scrollController = ScrollController();
-
-  void _irADetalle() {
-    Navigator.pushNamed(context, '/verADetallePQRSA');
-  }
-
-  void _irAEditar() {
-    Navigator.pushNamed(context, '/editarPQRSA');
-  }
 
   List<DataRow> _crearFilas(QuerySnapshot snapshot) {
     List<DataRow> newList =
@@ -53,13 +46,10 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
         DataCell(FlatButton(
           onPressed: () {
             Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: ((context) => 
-                verADetallePQRSA(documentSnapshot.id)
-                )
-              )
-            );
+                context,
+                MaterialPageRoute(
+                    builder: ((context) =>
+                        verADetallePQRSA(documentSnapshot.id))));
           },
           child: Text(
             "entrar",
@@ -69,7 +59,12 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
           color: Colores.Botones,
         )),
         DataCell(FlatButton(
-          onPressed: _irAEditar,
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => contenedorEditarPQRSA(documentSnapshot.id))));
+          },
           child: Text(
             "Editar",
             style: TextStyle(color: Colores.black),
@@ -109,38 +104,31 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
                         new DataColumn(
                             label: Center(
                                 child: Text('Fecha de radicación',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Tipo de pqrsa',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Area',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Documento del cliente',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Documento del recibidor',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Ver a detalle',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
                                 child: Text('Editar',
-                                    style:
-                                        TextStyle(color: Colores.white)))),
+                                    style: TextStyle(color: Colores.white)))),
                       ],
                       rows:
                           _crearFilas(snapshots.data as QuerySnapshot<Object?>),

@@ -59,7 +59,15 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
         textAlign: TextAlign.center,
       ))),
       DataCell(FlatButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) =>
+              contenedorEditarUsuario(documentSnapshot.id)
+              )
+            );
+        },
         child: Text(
           "Editar",
           style: TextStyle(color: Colores.black),
