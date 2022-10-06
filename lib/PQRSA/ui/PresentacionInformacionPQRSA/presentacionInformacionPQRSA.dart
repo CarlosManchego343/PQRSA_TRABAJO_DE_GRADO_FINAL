@@ -7,6 +7,8 @@ import 'package:pqrsafinal/PQRSA/ui/InformacionSobrePQRSA/informacionBasicaPQRSA
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class presentacionInformacionPQRSA extends StatefulWidget {
+  final String id;
+  presentacionInformacionPQRSA(this.id);
   @override
   presentacionInformacionPQRSAState createState() =>
       presentacionInformacionPQRSAState();
@@ -34,7 +36,7 @@ class presentacionInformacionPQRSAState
             endIndent: 32.0,
           ),
           Row(
-            children: <Widget>[informacionBasicaPQRSA()],
+            children: <Widget>[informacionBasicaPQRSA(widget.id)],
           )
         ],
       ),

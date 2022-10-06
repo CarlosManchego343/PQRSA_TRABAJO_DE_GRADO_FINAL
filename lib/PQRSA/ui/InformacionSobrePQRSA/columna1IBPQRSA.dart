@@ -1,15 +1,31 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class columna1IBPQRSA extends StatefulWidget {
+  final String id;
+  columna1IBPQRSA(this.id);
   @override
   columna1IBPQRSAState createState() => columna1IBPQRSAState();
 }
 
 class columna1IBPQRSAState extends State<columna1IBPQRSA> {
+
+  late Map informacionColumna;
+  CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
+  late String id;
+
+  @override
+  void initState() {
+    super.initState();
+    id = widget.id;
+    
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(

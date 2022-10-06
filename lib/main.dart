@@ -27,12 +27,11 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         title: 'PQRSA',
         theme: ThemeData(fontFamily: 'OpenSans'),
-        initialRoute: "/menuPrincipalPQRSA",
+        initialRoute: "/menuPrincipalUsuarios",
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           "/loginWeb": (BuildContext context) => new LoginWeb(),
           "/menuPrincipalPQRSA": (BuildContext context) => new menuPrincipalPQRSA(),
-          "/verADetallePQRSA": (BuildContext context) => new verADetallePQRSA(),
           "/editarPQRSA": (BuildContext context) => new editarPQRSA(),
           "/resetearContrasenia": (BuildContext context) =>
               new ResetearContrasenia(),

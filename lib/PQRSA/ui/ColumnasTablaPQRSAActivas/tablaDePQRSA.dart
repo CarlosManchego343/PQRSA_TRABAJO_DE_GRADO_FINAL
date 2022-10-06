@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_new, prefer_const_constructors
 
+import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/verADetallePQRSA.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,7 +51,16 @@ class tablaDePQRSAState extends State<tablaDePQRSA> {
           textAlign: TextAlign.center,
         ))),
         DataCell(FlatButton(
-          onPressed: _irADetalle,
+          onPressed: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: ((context) => 
+                verADetallePQRSA(documentSnapshot.id)
+                )
+              )
+            );
+          },
           child: Text(
             "entrar",
             style: TextStyle(color: Colores.black),

@@ -9,6 +9,8 @@ import 'package:pqrsafinal/PQRSA/ui/PresentacionInformacionPQRSA/presentacionTar
 import '../../../WidgetsGenerales/Theme.dart';
 
 class verADetallePQRSA extends StatefulWidget {
+  final String id;
+  verADetallePQRSA(this.id);
   @override
   verADetallePQRSAState createState() => verADetallePQRSAState();
 }
@@ -17,6 +19,8 @@ class verADetallePQRSAState extends State<verADetallePQRSA> {
   void volverAPrincipal() {
     Navigator.pushNamed(context, '/menuPrincipalPQRSA');
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class verADetallePQRSAState extends State<verADetallePQRSA> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              presentacionInformacionPQRSA(),
+              presentacionInformacionPQRSA(widget.id),
               Row(
                 children: <Widget>[
                   Flexible(

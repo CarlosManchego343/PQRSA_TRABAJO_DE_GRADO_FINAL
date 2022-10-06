@@ -90,22 +90,3 @@ class tablaDeManejoState extends State<tablaDeManejo> {
   }
 }
 
-class mostrarCardUsuario extends StatelessWidget {
-
-  final double? _opacidad;
-
-  final Function? _ocultarCardEditarUsuario;
-
-  final String _id;
-
-  mostrarCardUsuario(this._opacidad, this._ocultarCardEditarUsuario, this._id);
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child:
-          contenedorEditarUsuario(_opacidad!, _ocultarCardEditarUsuario!, _id),
-    );
-  }
-}

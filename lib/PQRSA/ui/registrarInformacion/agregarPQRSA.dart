@@ -69,6 +69,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   }
 
   void _agregarPQRSA() {
+    String id = Uuid().v1();
     if (_formKey.currentState!.validate()) {
       if (_tipoSeleccionado != 'Tipo de PQRSA') {
         if (_areaSeleccionada != 'Area') {
@@ -81,7 +82,8 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
               .then((sub) => {
                     if (sub.docs.isNotEmpty)
                       {
-                        db.collection('PQRSA').doc(Uuid().v1()).set({
+                        db.collection('PQRSA').doc(id).set({
+                          "id": id,
                           "Area": _areaSeleccionada,
                           "Documento_del_cliente": _documentoDelCliente!.text,
                           "Documento_del_recibidor":

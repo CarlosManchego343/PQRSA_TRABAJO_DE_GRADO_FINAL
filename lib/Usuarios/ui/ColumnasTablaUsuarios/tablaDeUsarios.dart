@@ -59,6 +59,15 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
         textAlign: TextAlign.center,
       ))),
       DataCell(FlatButton(
+        onPressed: (){},
+        child: Text(
+          "Editar",
+          style: TextStyle(color: Colores.black),
+          textAlign: TextAlign.center,
+        ),
+        color: Colores.Botones,
+      )),
+      DataCell(FlatButton(
         onPressed: () async{
           await AuthService().deleteUser(documentSnapshot.get('Correo'), documentSnapshot.get('Contrasenia'));
           await db.collection("Usuarios").doc(documentSnapshot.id).delete;
@@ -116,6 +125,10 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
                         new DataColumn(
                             label: Center(
                                 child: Text('Rol',
+                                    style: TextStyle(color: Colores.white)))),
+                        new DataColumn(
+                            label: Center(
+                                child: Text('Editar',
                                     style: TextStyle(color: Colores.white)))),
                         new DataColumn(
                             label: Center(
