@@ -6,6 +6,8 @@ import 'package:pqrsafinal/Cliente/ui/InformacionSobreCliente/informacionCliente
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class presentacionInformacionCliente extends StatefulWidget {
+  final String id;
+  presentacionInformacionCliente(this.id);
   @override
   presentacionInformacionClienteState createState() =>
       presentacionInformacionClienteState();
@@ -34,7 +36,7 @@ class presentacionInformacionClienteState
             color: Colores.black,
           ),
           Row(
-            children: <Widget>[informacionCliente()],
+            children: <Widget>[informacionCliente(widget.id)],
           )
         ],
       ),

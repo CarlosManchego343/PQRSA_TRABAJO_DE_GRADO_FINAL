@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
+import 'package:intl/intl.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:pqrsafinal/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
@@ -54,27 +55,24 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     _documentoDelCliente = TextEditingController(text: "");
   }
 
-  void CallDatePicker() async {
-    var _date = await getDatePickerWidget();
-    String _dateFormatted = DateFormat('dd-MM-yyyy').format(_date);
+  void _llamarFechaRadicacion() async {
+    var selectedDate = await getDatePickerWidget();
+    String fechaFormateada = DateFormat('dd/MM/yyyy').format(selectedDate!);
     setState(() {
-      _fechaNacimiento.text = _dateFormatted;
-      calcular();
-      caracter.fechaNacimiento = _date;
+      _fechaRadicacion!.text = fechaFormateada;
     });
   }
 
-
-  Future<DateTime> getDatePickerWidget() {
+  Future <DateTime?> getDatePickerWidget() {
     return showDatePicker(
-      context: context,
-      initialDate: DateTime(2000),
-      firstDate: DateTime(1970),
-      lastDate: DateTime.now(),
+      context: context, 
+      initialDate: DateTime.now(), 
+      firstDate: DateTime(2022), 
+      lastDate: DateTime(3021),
       builder: (context, child) {
-        return Theme(data: ThemeData.dark(), child: child);
-      },
-    );
+        return Theme(data: ThemeData.dark(), child: child!);
+      }
+      );
   }
 
   void _limpiarCampos() {
@@ -303,6 +301,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 bottom: 10.0),
                             child: Input(
                               placeholder: "Fecha de radicación",
+                              onTap: _llamarFechaRadicacion,
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
                               prefixIcon: Icon(Icons.date_range_rounded),

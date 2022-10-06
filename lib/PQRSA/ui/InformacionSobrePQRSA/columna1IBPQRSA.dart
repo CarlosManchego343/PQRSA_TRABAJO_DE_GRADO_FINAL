@@ -14,15 +14,23 @@ class columna1IBPQRSA extends StatefulWidget {
 
 class columna1IBPQRSAState extends State<columna1IBPQRSA> {
 
-  late Map informacionColumna;
+  late Map? informacionColumna;
   CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
-  late String id;
+  late String? id;
 
   @override
   void initState() {
     super.initState();
     id = widget.id;
-    
+    pqrsa
+    .where('id', isEqualTo: id)
+    .get()
+    .then(
+      (QuerySnapshot snapshot) => {
+        setState(() {
+          informacionColumna = snapshot.docs[0].data() as Map?;
+        }) 
+      });
   }
 
 
@@ -32,17 +40,17 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
       children: <Widget>[
         Column(
           children: <Widget>[
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.topCenter,
                   child: Text("Codigo:",
                       style: TextStyle(fontSize: 18, color: Colores.black, fontWeight: FontWeight.bold)),
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("WAPPET-2020-00127",
+                  alignment: Alignment.bottomCenter,
+                  child: Text(informacionColumna!["id"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -69,7 +77,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("16/09/2020",
+                  child: Text(informacionColumna!["Fecha_de_radicacion"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -95,36 +103,7 @@ class columna1IBPQRSAState extends State<columna1IBPQRSA> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Petición",
-                      style: TextStyle(fontSize: 18, color: Colores.black)),
-                ),
-              ],
-            )
-          ],
-        ),
-        Divider(
-          height: 40.0,
-          thickness: 1.5,
-          indent: 32.0,
-          endIndent: 32.0,
-          color: Colores.black,
-        ),
-        Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Recibida por:",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colores.black,
-                          fontWeight: FontWeight.bold)),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("1007656588",
+                  child: Text(informacionColumna!["Tipo_de_pqrsa"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],

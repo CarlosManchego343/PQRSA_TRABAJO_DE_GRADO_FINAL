@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import '../../../WidgetsGenerales/Theme.dart';
 import 'package:pqrsafinal/WidgetsGenerales/input.dart';
@@ -44,6 +45,26 @@ class editarPQRSAState extends State<editarPQRSA> {
   TextEditingController? _fechaRadicacion;
   TextEditingController? _documentoDelRecibidor;
   TextEditingController? _documentoDelCliente;
+
+  void _llamarFechaRadicacion() async {
+    var selectedDate = await getDatePickerWidget();
+    String fechaFormateada = DateFormat('dd/MM/yyyy').format(selectedDate!);
+    setState(() {
+      _fechaRadicacion!.text = fechaFormateada;
+    });
+  }
+
+  Future <DateTime?> getDatePickerWidget() {
+    return showDatePicker(
+      context: context, 
+      initialDate: DateTime.now(), 
+      firstDate: DateTime(2022), 
+      lastDate: DateTime(3021),
+      builder: (context, child) {
+        return Theme(data: ThemeData.dark(), child: child!);
+      }
+      );
+  }
 
   late Map? pqrsaEncontrada;
 
@@ -275,6 +296,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                               inputFormatter:
                                   FilteringTextInputFormatter.deny(""),
                               prefixIcon: Icon(Icons.date_range_rounded),
+                              onTap: _llamarFechaRadicacion,
                               controller: _fechaRadicacion,
                               validator: (fecha) {
                                 if (fecha.isEmpty) {

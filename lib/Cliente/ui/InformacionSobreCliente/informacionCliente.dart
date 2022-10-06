@@ -6,6 +6,8 @@ import 'package:pqrsafinal/Cliente/ui/InformacionSobreCliente/columnaIC.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class informacionCliente extends StatefulWidget {
+  final String id;
+  informacionCliente(this.id);
   @override
   informacionClienteState createState() => informacionClienteState();
 }
@@ -20,7 +22,7 @@ class informacionClienteState extends State<informacionCliente> {
               controller: ScrollController(),
               children: <Widget>[
                 Column(
-                  children: <Widget>[columnaIC()],
+                  children: <Widget>[columnaIC(widget.id)],
                 )
               ],
             )));

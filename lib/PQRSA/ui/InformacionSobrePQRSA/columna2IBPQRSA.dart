@@ -1,15 +1,38 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class columna2IBPQRSA extends StatefulWidget {
+  final String id;
+  columna2IBPQRSA(this.id);
   @override
   columna2IBPQRSAState createState() => columna2IBPQRSAState();
 }
 
 class columna2IBPQRSAState extends State<columna2IBPQRSA> {
+
+  late Map? informacionColumna;
+  CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
+  late String? id;
+
+  @override
+  void initState() {
+    super.initState();
+    id = widget.id;
+    pqrsa
+    .where('id', isEqualTo: id)
+    .get()
+    .then(
+      (QuerySnapshot snapshot) => {
+        setState(() {
+          informacionColumna = snapshot.docs[0].data() as Map?;
+        }) 
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,7 +53,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                      "Respuesta proyectos de inversión social vigencias 2018, 2019 y 2020",
+                      informacionColumna!["Asunto"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -51,7 +74,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Dirijido a:",
+                  child: Text("Estado:",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colores.black,
@@ -59,7 +82,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Trevor Belmont",
+                  child: Text(informacionColumna!["Estado"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -80,7 +103,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Bloque:",
+                  child: Text("Documento del recibidor",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colores.black,
@@ -88,7 +111,7 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Vallemedio",
+                  child: Text(informacionColumna!["Documento_del_recibidor"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],

@@ -5,11 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class columnaIC extends StatefulWidget {
+  final String id;
+  columnaIC(this.id);
   @override
   columnaICState createState() => columnaICState();
 }
 
 class columnaICState extends State<columnaIC> {
+
+  
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
