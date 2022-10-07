@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
@@ -12,9 +13,38 @@ class columnaIC extends StatefulWidget {
 }
 
 class columnaICState extends State<columnaIC> {
+  String? id;
 
-  
+  String? numeroIdentidadCliente;
 
+  Map? pqrsaEncontrada;
+
+  Map? clienteEncontrado;
+
+  CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
+  CollectionReference cliente =
+      FirebaseFirestore.instance.collection('Cliente');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    id = widget.id;
+    pqrsa.where('id', isEqualTo: id).get().then((QuerySnapshot snapshot) => {
+          setState(() {
+            pqrsaEncontrada = snapshot.docs[0].data() as Map?;
+            numeroIdentidadCliente = pqrsaEncontrada!["Documento_del_cliente"];
+          }),
+          cliente
+              .where('Numero_de_documento', isEqualTo: numeroIdentidadCliente)
+              .get()
+              .then((QuerySnapshot snapshot) => {
+                    setState(() {
+                      clienteEncontrado = snapshot.docs[0].data() as Map?;
+                    })
+                  })
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +65,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("1007565696",
+                  child: Text(clienteEncontrado!["Numero_de_documento"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -64,7 +94,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("León Ernesto Perez Torrez",
+                  child: Text(clienteEncontrado!["Nombre"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -93,7 +123,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("3134568970",
+                  child: Text(clienteEncontrado!["Telefono"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -122,7 +152,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("leonept@gmail.com",
+                  child: Text(clienteEncontrado!["Correo_electronico"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -151,7 +181,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Carrera 3-B #45 - 06",
+                  child: Text(clienteEncontrado!["Direccion"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
@@ -180,7 +210,7 @@ class columnaICState extends State<columnaIC> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Pueblo viejo",
+                  child: Text(clienteEncontrado!["Municipio_de_residencia"],
                       style: TextStyle(fontSize: 18, color: Colores.black)),
                 ),
               ],
