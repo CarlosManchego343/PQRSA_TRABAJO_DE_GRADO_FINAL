@@ -7,6 +7,8 @@ import 'package:pqrsafinal/Cliente/ui/InformacionSobreCliente/columnaIC.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class botones extends StatefulWidget {
+  final String id;
+  botones(this.id);
   @override
   botonesState createState() => botonesState();
 }
@@ -21,7 +23,7 @@ class botonesState extends State<botones> {
               controller: ScrollController(),
               children: <Widget>[
                 Column(
-                  children: <Widget>[columnaBotones()],
+                  children: <Widget>[columnaBotones(widget.id)],
                 )
               ],
             )));

@@ -51,7 +51,7 @@ class verADetallePQRSAState extends State<verADetallePQRSA> {
                     child: presentacionInformacionCliente(widget.id),
                   ),
                   Flexible(flex: 2, child: presentacionTareasAsignadas(widget.id)),
-                  Flexible(flex: 2, child: presentacionBotones()),
+                  Flexible(flex: 2, child: presentacionBotones(widget.id)),
                 ],
               )
             ],

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class columnaBotones extends StatefulWidget {
+  final String id;
+  columnaBotones(this.id);
   @override
   columnaBotonesState createState() => columnaBotonesState();
 }
@@ -15,7 +17,7 @@ class columnaBotonesState extends State<columnaBotones> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        SizedBox(height: 50),
+        SizedBox(height: 25),
         FlatButton(
           onPressed: () {},
           child: Text(
@@ -26,7 +28,7 @@ class columnaBotonesState extends State<columnaBotones> {
           height: 50,
           minWidth: 100,
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 25),
         FlatButton(
           onPressed: () {},
           child: Text(
@@ -37,7 +39,7 @@ class columnaBotonesState extends State<columnaBotones> {
           height: 50,
           minWidth: 100,
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 25),
         FlatButton(
           onPressed: () {},
           child: Text(
@@ -48,7 +50,18 @@ class columnaBotonesState extends State<columnaBotones> {
           height: 50,
           minWidth: 100,
         ),
-        SizedBox(height: 50),
+        SizedBox(height: 25),
+        FlatButton(
+          onPressed: () {},
+          child: Text(
+            "Editar cliente",
+            style: TextStyle(color: Colores.black),
+          ),
+          color: Colores.Botones,
+          height: 50,
+          minWidth: 100,
+        ),
+        SizedBox(height: 25),
       ],
     );
   }

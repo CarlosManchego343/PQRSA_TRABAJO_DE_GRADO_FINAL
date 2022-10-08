@@ -9,6 +9,8 @@ import 'package:pqrsafinal/PQRSA/ui/BotonesDeVerADetalle/botones.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class presentacionBotones extends StatefulWidget {
+  final String id;
+  presentacionBotones(this.id);
   @override
   presentacionBotonesState createState() =>
       presentacionBotonesState();
@@ -22,7 +24,7 @@ class presentacionBotonesState
       child: Column(
         children: <Widget>[
           Row(
-            children: <Widget>[botones()],
+            children: <Widget>[botones(widget.id)],
           )
         ],
       ),
