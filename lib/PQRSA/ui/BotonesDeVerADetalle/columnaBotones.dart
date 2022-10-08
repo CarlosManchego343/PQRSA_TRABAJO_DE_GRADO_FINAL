@@ -17,7 +17,7 @@ class columnaBotonesState extends State<columnaBotones> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        SizedBox(height: 25),
+        SizedBox(height: 50),
         FlatButton(
           onPressed: () {},
           child: Text(
