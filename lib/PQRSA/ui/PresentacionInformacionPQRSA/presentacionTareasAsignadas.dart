@@ -9,6 +9,8 @@ import 'package:pqrsafinal/Cliente/ui/InformacionSobreCliente/informacionCliente
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class presentacionTareasAsignadas extends StatefulWidget {
+  final String id;
+  presentacionTareasAsignadas(this.id);
   @override
   presentacionTareasAsignadasState createState() =>
       presentacionTareasAsignadasState();
@@ -37,7 +39,7 @@ class presentacionTareasAsignadasState
             color: Colores.black,
           ),
           Row(
-            children: <Widget>[informacionTareas()],
+            children: <Widget>[informacionTareas(widget.id)],
           )
         ],
       ),

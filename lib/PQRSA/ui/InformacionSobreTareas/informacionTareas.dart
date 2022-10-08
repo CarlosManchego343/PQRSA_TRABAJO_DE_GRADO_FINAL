@@ -2,15 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/columnaTareas.dart';
+import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/contenedorAgregarUnaTarea.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
 class informacionTareas extends StatefulWidget {
+  final String id;
+  informacionTareas(this.id);
   @override
   informacionTareasState createState() => informacionTareasState();
 }
 
 class informacionTareasState extends State<informacionTareas> {
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -21,14 +25,25 @@ class informacionTareasState extends State<informacionTareas> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    LinearProgressIndicator(
-                      backgroundColor: Colores.bgBarraDeProgreso,
-                      valueColor:
-                          AlwaysStoppedAnimation(Colores.bgCabeceraPrincipal),
-                      minHeight: 20,
+                    Center(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder:(context) => contenedorAgregarUnaTarea(widget.id) )
+                            );
+                        },
+                        child: Text(
+                          "Agregar Tareas",
+                          style: TextStyle(color: Colores.black),
+                        ),
+                        color: Colores.Botones,
+                        height: 50,
+                        minWidth: 100,
+                      ),
                     ),
                     SizedBox(height: 15),
-                    columnaTareas()
+                    columnaTareas(widget.id)
                   ],
                 )
               ],
