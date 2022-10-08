@@ -6,14 +6,15 @@ import 'package:uuid/uuid.dart';
 import '../../../WidgetsGenerales/Theme.dart';
 import '../../../WidgetsGenerales/input.dart';
 
-class agregarUnaTarea extends StatefulWidget {
-  final String id;
-  agregarUnaTarea(this.id);
+class editarUnaTarea extends StatefulWidget {
+  final String idPqrsa;
+  final String idTarea;
+  editarUnaTarea(this.idPqrsa, this.idTarea);
   @override
-  agregarUnaTareaState createState() => agregarUnaTareaState();
+  editarUnaTareaState createState() => editarUnaTareaState();
 }
 
-class agregarUnaTareaState extends State<agregarUnaTarea> {
+class editarUnaTareaState extends State<editarUnaTarea> {
 
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -23,34 +24,44 @@ class agregarUnaTareaState extends State<agregarUnaTarea> {
 
   String? idDeLaPqrsa;
 
+  String? idDeLaTarea;
+
+  Map? tareaEncontrada;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    idDeLaPqrsa = widget.id;
+    idDeLaPqrsa = widget.idPqrsa;
+    idDeLaTarea = widget.idTarea;
+    db.collection('PQRSA')
+      .doc(idDeLaPqrsa)
+      .collection('Tareas')
+      .where("id", isEqualTo: idDeLaTarea)
+      .get()
+      .then((QuerySnapshot snapshot) => {
+          setState(
+            () {
+              tareaEncontrada = snapshot.docs[0].data() as Map?;
+              _nombreDeTarea = TextEditingController(text: tareaEncontrada!["Nombre"]);
+            }
+          )
+      });
     _nombreDeTarea = TextEditingController(text: "");
   }
 
-  void _limpiarCampos() {
-    _nombreDeTarea!.text = "";
-  }
-
   void agregarTarea() {
-    String id = Uuid().v4();
     if (_formKey.currentState!.validate()) {
       db.collection('PQRSA')
       .doc(idDeLaPqrsa)
       .collection('Tareas')
-      .doc(id)
-      .set({
+      .doc(idDeLaTarea)
+      .update({
         "Nombre": _nombreDeTarea!.text,
-        "Estado": false,
-        "id": id
       });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
-                                Text("Información registrada correctamente")));
-      _limpiarCampos();
+                                Text("Información actulizada correctamente")));
     }
   }
 

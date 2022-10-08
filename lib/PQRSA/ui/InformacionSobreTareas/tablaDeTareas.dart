@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/contenedorEditarUnaTarea.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -40,7 +41,13 @@ class tablaDeTareasState extends State<tablaDeTareas> {
           activeColor: Colores.bgTituloLogin,
         ))),
         DataCell(FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => contenedorEditarUnaTarea(
+                        widget.id, documentSnapshot.id))));
+          },
           child: Text(
             "Editar",
             style: TextStyle(color: Colores.black),
@@ -51,11 +58,11 @@ class tablaDeTareasState extends State<tablaDeTareas> {
         DataCell(FlatButton(
           onPressed: () {
             FirebaseFirestore.instance
-                  .collection('PQRSA')
-                  .doc(widget.id)
-                  .collection('Tareas')
-                  .doc(documentSnapshot.id)
-                  .delete();
+                .collection('PQRSA')
+                .doc(widget.id)
+                .collection('Tareas')
+                .doc(documentSnapshot.id)
+                .delete();
           },
           child: Text(
             "Eliminar",
