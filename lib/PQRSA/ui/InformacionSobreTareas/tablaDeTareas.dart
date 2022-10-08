@@ -5,17 +5,15 @@ import 'package:flutter/material.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
-class columnaTareas extends StatefulWidget {
+class tablaDeTareas extends StatefulWidget {
   final String id;
-  columnaTareas(this.id);
+  tablaDeTareas(this.id);
   @override
-  columnaTareasState createState() => columnaTareasState();
+  tablaDeTareasState createState() => tablaDeTareasState();
 }
 
-class columnaTareasState extends State<columnaTareas> {
+class tablaDeTareasState extends State<tablaDeTareas> {
   final ScrollController _scrollController = ScrollController();
-  
-  String? id;
 
   List<DataRow> _crearFilas(QuerySnapshot snapshot) {
     List<DataRow> newList =
@@ -26,8 +24,20 @@ class columnaTareasState extends State<columnaTareas> {
           documentSnapshot.get('Nombre'),
         ))),
         DataCell(Center(
-            child: Text(
-          documentSnapshot.get('Estado'),
+            child: Switch(
+          value: documentSnapshot.get('Estado'),
+          onChanged: (value) {
+            setState(() {
+              FirebaseFirestore.instance
+                  .collection('PQRSA')
+                  .doc(widget.id)
+                  .collection('Tareas')
+                  .doc(documentSnapshot.id)
+                  .update({"Estado": value});
+            });
+          },
+          activeTrackColor: Colores.cuerpoSwicth,
+          activeColor: Colores.bgTituloLogin,
         ))),
         DataCell(FlatButton(
           onPressed: () {},
@@ -39,7 +49,14 @@ class columnaTareasState extends State<columnaTareas> {
           color: Colores.Botones,
         )),
         DataCell(FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            FirebaseFirestore.instance
+                  .collection('PQRSA')
+                  .doc(widget.id)
+                  .collection('Tareas')
+                  .doc(documentSnapshot.id)
+                  .delete();
+          },
           child: Text(
             "Eliminar",
             style: TextStyle(color: Colores.black),
@@ -57,10 +74,7 @@ class columnaTareasState extends State<columnaTareas> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    id = widget.id;
-    print("Traje este id" + id!);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +91,7 @@ class columnaTareasState extends State<columnaTareas> {
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('PQRSA')
-                      .doc(id)
+                      .doc(widget.id)
                       .collection('Tareas')
                       .snapshots(),
                   builder: (context, snapshots) {

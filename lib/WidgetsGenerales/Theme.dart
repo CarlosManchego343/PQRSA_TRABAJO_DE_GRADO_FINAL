@@ -11,6 +11,8 @@ class Colores {
 
   static const Color Botones = Color(0xFFFF8A80);
 
+  static const Color cuerpoSwicth = Color(0xFFEF9A9A);
+
   static const Color BordeDeInputs = Color(0xFFFF1744);
 
   static const Color bgTituloLogin = Color(0xFFC62828);

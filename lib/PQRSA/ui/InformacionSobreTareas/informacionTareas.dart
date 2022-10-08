@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/columnaTareas.dart';
+import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/tablaDeTareas.dart';
 import 'package:pqrsafinal/PQRSA/ui/InformacionSobreTareas/contenedorAgregarUnaTarea.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
@@ -43,7 +43,11 @@ class informacionTareasState extends State<informacionTareas> {
                       ),
                     ),
                     SizedBox(height: 15),
-                    columnaTareas(widget.id)
+                    Row(
+                      children: <Widget>[
+                        tablaDeTareas(widget.id)
+                      ],
+                    )
                   ],
                 )
               ],
