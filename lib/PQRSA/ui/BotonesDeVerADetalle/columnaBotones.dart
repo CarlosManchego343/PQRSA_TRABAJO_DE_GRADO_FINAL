@@ -3,12 +3,14 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 
 
 import 'package:file_picker/file_picker.dart';
+import 'package:pqrsafinal/Cliente/ui/EditarCliente/contenedorEditarCliente.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -20,9 +22,22 @@ class columnaBotones extends StatefulWidget {
 }
 
 class columnaBotonesState extends State<columnaBotones> {
-
  
   PlatformFile? archivoSeleccionado;
+
+  CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
+
+  CollectionReference cliente = FirebaseFirestore.instance.collection('Cliente');
+
+  String? idPqrsa;
+
+  String? idCliente;
+
+  Map? pqrsaEncontrada;
+
+  String? numeroIdentidadCliente;
+
+  Map? clienteEncontrado;
 
   Future seleccionarArchivo() async {
     final result = await FilePicker.platform.pickFiles();
@@ -34,16 +49,40 @@ class columnaBotonesState extends State<columnaBotones> {
 
   Future enviarArchivo() async {
     final path = 'Archivos/${widget.id}/${archivoSeleccionado!.name}';
-    final archivo = File(archivoSeleccionado!.path!);
+    final archivo = archivoSeleccionado!.bytes!;
 
     final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putFile(archivo);
+    ref.putData(archivo);
   }
 
   void eliminarArchivo() {
     setState(() {
       archivoSeleccionado = null;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    idPqrsa = widget.id;
+    pqrsa.where('id', isEqualTo: idPqrsa).get().then((QuerySnapshot snapshot) => {
+          setState(() {
+            pqrsaEncontrada = snapshot.docs[0].data() as Map?;
+            numeroIdentidadCliente = pqrsaEncontrada!["Documento_del_cliente"];
+            
+          }),
+          cliente
+              .where('Numero_de_documento', isEqualTo: numeroIdentidadCliente)
+              .get()
+              .then((QuerySnapshot snapshot) => {
+                    setState(() {
+                      clienteEncontrado = snapshot.docs[0].data() as Map?;
+                      idCliente = clienteEncontrado!["id"];
+                    })
+                  })
+        });
+    
   }
 
   @override
@@ -113,7 +152,14 @@ class columnaBotonesState extends State<columnaBotones> {
         ),
         SizedBox(height: 25),
         FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => contenedorEditarCliente(idCliente!)
+                )
+              );
+          },
           child: Text(
             "Editar cliente",
             style: TextStyle(color: Colores.black),

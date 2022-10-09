@@ -1,24 +1,30 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
-import 'package:pqrsafinal/WidgetsGenerales/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uuid/uuid.dart';
 
-class agregarClientePQRS extends StatefulWidget {
+import '../../../WidgetsGenerales/Theme.dart';
+import '../../../WidgetsGenerales/input.dart';
+
+class editarCliente extends StatefulWidget {
+  final String idDelCliente;
+  editarCliente(this.idDelCliente);
   @override
-  agregarPQRSClienteState createState() => agregarPQRSClienteState();
+  editarClienteState createState() => editarClienteState();
 }
 
-class agregarPQRSClienteState extends State<agregarClientePQRS> {
+class editarClienteState extends State<editarCliente> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _municipioSeleccionado = 'Municipio de residencia';
 
-  List _municipio = ['Municipio de residencia', 'Cota', 'Chia', 'Cajica', 'Tenjo'];
+  List _municipio = [
+    'Municipio de residencia',
+    'Cota',
+    'Chia',
+    'Cajica',
+    'Tenjo'
+  ];
 
   TextEditingController? _nombreCliente;
   TextEditingController? _documentoCliente;
@@ -26,43 +32,51 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
   TextEditingController? _correo;
   TextEditingController? _direccion;
 
+  String? idCLiente;
+
+  Map? clienteEncontrado;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _nombreCliente = TextEditingController(text: "");
-    _documentoCliente = TextEditingController(text: "");
-    _telefono = TextEditingController(text: "");
-    _correo = TextEditingController(text: "");
-    _direccion = TextEditingController(text: "");
+    idCLiente = widget.idDelCliente;
+    db
+        .collection("Cliente")
+        .where("id", isEqualTo: idCLiente)
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                clienteEncontrado = snapshot.docs[0].data() as Map?;
+                _nombreCliente =
+                    TextEditingController(text: clienteEncontrado!["Nombre"]);
+                _documentoCliente = TextEditingController(
+                    text: clienteEncontrado!["Numero_de_documento"]);
+                _telefono =
+                    TextEditingController(text: clienteEncontrado!["Telefono"]);
+                _correo = TextEditingController(
+                    text: clienteEncontrado!["Correo_electronico"]);
+                _direccion = TextEditingController(
+                    text: clienteEncontrado!["Direccion"]);
+                _municipioSeleccionado =
+                    clienteEncontrado!["Municipio_de_residencia"];
+              })
+            });
   }
 
-  _limpiarCampos() {
-    _municipioSeleccionado = "Municipio de residencia";
-    _municipio = ['Municipio de residencia', 'Cota', 'Chia', 'Cajica', 'Tenjo'];
-    _nombreCliente!.text = "";
-    _documentoCliente!.text = "";
-    _telefono!.text = "";
-    _correo!.text = "";
-    _direccion!.text = "";
-  }
-
-  void _AgregarCliente() {
-    String id = Uuid().v4();
+  void _editarCliente() {
     if (_formKey.currentState!.validate()) {
       if (_municipioSeleccionado != 'Municipio de residencia') {
-        db.collection('Cliente').doc(id).set({
+        db.collection('Cliente').doc(widget.idDelCliente).update({
           "Correo_electronico": _correo!.text,
           "Direccion": _direccion!.text,
           "Municipio_de_residencia": _municipioSeleccionado,
           "Nombre": _nombreCliente!.text,
           "Numero_de_documento": _documentoCliente!.text,
           "Telefono": _telefono!.text,
-          "id": id
         });
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Información registrada correctamente")));
-        _limpiarCampos();
+            SnackBar(content: Text("Información editada correctamente")));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Por favor, elija un municipio")));
@@ -72,6 +86,7 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
         body: Container(
       padding: EdgeInsets.all(20),
@@ -97,7 +112,8 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                                 placeholder: "Número de documento",
                                 prefixIcon: Icon(Icons.pin_rounded),
                                 controller: _documentoCliente,
-                                inputFormatter: FilteringTextInputFormatter.digitsOnly,
+                                inputFormatter:
+                                    FilteringTextInputFormatter.digitsOnly,
                                 validator: (documento) {
                                   if (documento.isEmpty) {
                                     return 'Por favor introduzca el numero de documento';
@@ -254,9 +270,9 @@ class agregarPQRSClienteState extends State<agregarClientePQRS> {
                 ),
                 SizedBox(height: 15),
                 FlatButton(
-                  onPressed: _AgregarCliente,
+                  onPressed: _editarCliente,
                   child: Text(
-                    "Registrar",
+                    "Editar",
                     style: TextStyle(color: Colores.black),
                   ),
                   color: Colores.Botones,
