@@ -51,8 +51,7 @@ class columnaBotonesState extends State<columnaBotones> {
     final path = 'Archivos/${widget.id}/${archivoSeleccionado!.name}';
     final archivo = archivoSeleccionado!.bytes!;
 
-    final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putData(archivo);
+    await FirebaseStorage.instance.ref(path).putData(archivo);
   }
 
   void eliminarArchivo() {
@@ -112,7 +111,7 @@ class columnaBotonesState extends State<columnaBotones> {
           FlatButton(
             onPressed: eliminarArchivo,
             child: Text(
-              "Eliminar archivo",
+              "Elegir otro archivo",
               style: TextStyle(color: Colores.black),
             ),
             color: Colores.Botones,
