@@ -28,7 +28,7 @@ class informacionBasicaPQRSAState extends State<informacionBasicaPQRSA> {
                       children: <Widget>[
                         Flexible(flex: 2, child: columna1IBPQRSA(widget.id)),
                         Flexible(flex: 2, child: columna2IBPQRSA(widget.id)),
-                        Flexible(flex: 2, child: documentosPQRSA())
+                        Flexible(flex: 2, child: documentosPQRSA(widget.id))
                       ],
                     )
                   ],

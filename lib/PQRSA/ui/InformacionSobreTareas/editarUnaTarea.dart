@@ -15,7 +15,6 @@ class editarUnaTarea extends StatefulWidget {
 }
 
 class editarUnaTareaState extends State<editarUnaTarea> {
-
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   final _formKey = GlobalKey<FormState>();
@@ -34,34 +33,34 @@ class editarUnaTareaState extends State<editarUnaTarea> {
     super.initState();
     idDeLaPqrsa = widget.idPqrsa;
     idDeLaTarea = widget.idTarea;
-    db.collection('PQRSA')
-      .doc(idDeLaPqrsa)
-      .collection('Tareas')
-      .where("id", isEqualTo: idDeLaTarea)
-      .get()
-      .then((QuerySnapshot snapshot) => {
-          setState(
-            () {
-              tareaEncontrada = snapshot.docs[0].data() as Map?;
-              _nombreDeTarea = TextEditingController(text: tareaEncontrada!["Nombre"]);
-            }
-          )
-      });
+    db
+        .collection('PQRSA')
+        .doc(idDeLaPqrsa)
+        .collection('Tareas')
+        .where("id", isEqualTo: idDeLaTarea)
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                tareaEncontrada = snapshot.docs[0].data() as Map?;
+                _nombreDeTarea =
+                    TextEditingController(text: tareaEncontrada!["Nombre"]);
+              })
+            });
     _nombreDeTarea = TextEditingController(text: "");
   }
 
   void agregarTarea() {
     if (_formKey.currentState!.validate()) {
-      db.collection('PQRSA')
-      .doc(idDeLaPqrsa)
-      .collection('Tareas')
-      .doc(idDeLaTarea)
-      .update({
+      db
+          .collection('PQRSA')
+          .doc(idDeLaPqrsa)
+          .collection('Tareas')
+          .doc(idDeLaTarea)
+          .update({
         "Nombre": _nombreDeTarea!.text,
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text("Información actulizada correctamente")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Información actulizada correctamente")));
     }
   }
 
@@ -78,25 +77,21 @@ class editarUnaTareaState extends State<editarUnaTarea> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Input(
-                              placeholder: "Nombre de la tarea",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.article_rounded),
-                              controller: _nombreDeTarea,
-                              validator: (fecha) {
-                                if (fecha.isEmpty) {
-                                  return 'Debe poner un nombre a la tarea';
-                                }
-                              },
-                            ),
-                          ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
+                  child: Input(
+                    placeholder: "Nombre de la tarea",
+                    inputFormatter: FilteringTextInputFormatter.deny(""),
+                    prefixIcon: Icon(Icons.article_rounded),
+                    controller: _nombreDeTarea,
+                    validator: (fecha) {
+                      if (fecha.isEmpty) {
+                        return 'Debe poner un nombre a la tarea';
+                      }
+                    },
+                  ),
+                ),
                 SizedBox(height: 15),
                 FlatButton(
                   onPressed: () {

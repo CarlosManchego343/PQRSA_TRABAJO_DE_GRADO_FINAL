@@ -24,7 +24,6 @@ class botonesState extends State<botones> {
               margin: EdgeInsets.only(left: 90, top: 8, bottom: 8, right: 90),
               child: Scrollbar(
                 controller: _scrollController,
-                isAlwaysShown: true,
                 scrollbarOrientation: ScrollbarOrientation.right,
                 thickness: 10,
                 radius: Radius.circular(20),

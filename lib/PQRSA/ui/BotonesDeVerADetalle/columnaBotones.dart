@@ -1,15 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
-
-
 import 'package:file_picker/file_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:pqrsafinal/Cliente/ui/EditarCliente/contenedorEditarCliente.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
@@ -22,12 +20,15 @@ class columnaBotones extends StatefulWidget {
 }
 
 class columnaBotonesState extends State<columnaBotones> {
- 
   PlatformFile? archivoSeleccionado;
 
   CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
 
-  CollectionReference cliente = FirebaseFirestore.instance.collection('Cliente');
+  CollectionReference pqrsaCerradas =
+      FirebaseFirestore.instance.collection('PQRSA_cerrada');
+
+  CollectionReference cliente =
+      FirebaseFirestore.instance.collection('Cliente');
 
   String? idPqrsa;
 
@@ -38,6 +39,8 @@ class columnaBotonesState extends State<columnaBotones> {
   String? numeroIdentidadCliente;
 
   Map? clienteEncontrado;
+
+  String? fechaDeCierre;
 
   Future seleccionarArchivo() async {
     final result = await FilePicker.platform.pickFiles();
@@ -65,23 +68,42 @@ class columnaBotonesState extends State<columnaBotones> {
     // TODO: implement initState
     super.initState();
     idPqrsa = widget.id;
-    pqrsa.where('id', isEqualTo: idPqrsa).get().then((QuerySnapshot snapshot) => {
-          setState(() {
-            pqrsaEncontrada = snapshot.docs[0].data() as Map?;
-            numeroIdentidadCliente = pqrsaEncontrada!["Documento_del_cliente"];
-            
-          }),
-          cliente
-              .where('Numero_de_documento', isEqualTo: numeroIdentidadCliente)
-              .get()
-              .then((QuerySnapshot snapshot) => {
-                    setState(() {
-                      clienteEncontrado = snapshot.docs[0].data() as Map?;
-                      idCliente = clienteEncontrado!["id"];
-                    })
-                  })
-        });
-    
+    var fechaActual = new DateTime.now();
+    fechaDeCierre = DateFormat('dd/MM/yyyy').format(fechaActual);
+    pqrsa
+        .where('id', isEqualTo: idPqrsa)
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                pqrsaEncontrada = snapshot.docs[0].data() as Map?;
+                numeroIdentidadCliente = pqrsaEncontrada!["Documento_del_cliente"];
+              }),
+              cliente
+                  .where('Numero_de_documento',
+                      isEqualTo: numeroIdentidadCliente)
+                  .get()
+                  .then((QuerySnapshot snapshot) => {
+                        setState(() {
+                          clienteEncontrado = snapshot.docs[0].data() as Map?;
+                          idCliente = clienteEncontrado!["id"];
+                        })
+                      })
+            });
+  }
+
+  void cerrarPQRSA() {
+    pqrsaCerradas.doc(pqrsaEncontrada!["id"])
+    .set({
+      "id": pqrsaEncontrada!["id"],
+      "Area": pqrsaEncontrada!["Area"],
+      "Asunto": pqrsaEncontrada!["Asunto"],
+      "Documento_del_cliente": pqrsaEncontrada!["Documento_del_cliente"],
+      "Documento_del_recibidor": pqrsaEncontrada!["Documento_del_recibidor"],
+      "Estado": "Cerrada",
+      "Fecha_de_radicacion": pqrsaEncontrada!["Fecha_de_radicacion"],
+      "Fecha_de_cierre": fechaDeCierre,
+      "Tipo_de_pqrsa": pqrsaEncontrada!["Tipo_de_pqrsa"],
+    });
   }
 
   @override
@@ -153,11 +175,9 @@ class columnaBotonesState extends State<columnaBotones> {
         FlatButton(
           onPressed: () {
             Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => contenedorEditarCliente(idCliente!)
-                )
-              );
+                context,
+                MaterialPageRoute(
+                    builder: (context) => contenedorEditarCliente(idCliente!)));
           },
           child: Text(
             "Editar cliente",
