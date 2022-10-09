@@ -30,6 +30,9 @@ class columnaBotonesState extends State<columnaBotones> {
   CollectionReference cliente =
       FirebaseFirestore.instance.collection('Cliente');
 
+  CollectionReference datosPQRSA =
+      FirebaseFirestore.instance.collection('Datos_PQRSA');
+
   String? idPqrsa;
 
   String? idCliente;
@@ -38,9 +41,13 @@ class columnaBotonesState extends State<columnaBotones> {
 
   String? numeroIdentidadCliente;
 
+  String? tipoDePQRSA;
+
   Map? clienteEncontrado;
 
   String? fechaDeCierre;
+
+  Map? datosDeGraficaPQRSACerradas;
 
   Future seleccionarArchivo() async {
     final result = await FilePicker.platform.pickFiles();
@@ -76,7 +83,9 @@ class columnaBotonesState extends State<columnaBotones> {
         .then((QuerySnapshot snapshot) => {
               setState(() {
                 pqrsaEncontrada = snapshot.docs[0].data() as Map?;
-                numeroIdentidadCliente = pqrsaEncontrada!["Documento_del_cliente"];
+                numeroIdentidadCliente =
+                    pqrsaEncontrada!["Documento_del_cliente"];
+                tipoDePQRSA = pqrsaEncontrada!["Tipo_de_pqrsa"];
               }),
               cliente
                   .where('Numero_de_documento',
@@ -89,11 +98,18 @@ class columnaBotonesState extends State<columnaBotones> {
                         })
                       })
             });
+    datosPQRSA
+        .where("id", isEqualTo: "Cerradas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSACerradas = snapshot.docs[0].data() as Map?;
+              })
+            });
   }
 
   void cerrarPQRSA() {
-    pqrsaCerradas.doc(pqrsaEncontrada!["id"])
-    .set({
+    pqrsaCerradas.doc(pqrsaEncontrada!["id"]).set({
       "id": pqrsaEncontrada!["id"],
       "Area": pqrsaEncontrada!["Area"],
       "Asunto": pqrsaEncontrada!["Asunto"],
@@ -104,6 +120,30 @@ class columnaBotonesState extends State<columnaBotones> {
       "Fecha_de_cierre": fechaDeCierre,
       "Tipo_de_pqrsa": pqrsaEncontrada!["Tipo_de_pqrsa"],
     });
+    if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Agradecimiento") {
+      datosPQRSA.doc("Cerradas").update({
+        "Agradecimientos": datosDeGraficaPQRSACerradas!["Agradecimientos"] + 1
+      });
+    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Petición") {
+      datosPQRSA
+          .doc("Cerradas")
+          .update({"Peticion": datosDeGraficaPQRSACerradas!["Peticion"] + 1});
+    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Queja") {
+      datosPQRSA
+          .doc("Cerradas")
+          .update({"Queja": datosDeGraficaPQRSACerradas!["Queja"] + 1});
+    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Reclamo") {
+      datosPQRSA
+          .doc("Cerradas")
+          .update({"Reclamo": datosDeGraficaPQRSACerradas!["Reclamo"] + 1});
+    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Sugerencia") {
+      datosPQRSA
+          .doc("Cerradas")
+          .update({"Sugerencias": datosDeGraficaPQRSACerradas!["Sugerencias"] + 1});
+    }
+
+    pqrsa.doc(pqrsaEncontrada!["id"]).delete();
+    Navigator.pushNamed(context, '/menuPrincipalPQRSA');
   }
 
   @override
@@ -151,7 +191,7 @@ class columnaBotonesState extends State<columnaBotones> {
         ),
         SizedBox(height: 25),
         FlatButton(
-          onPressed: () {},
+          onPressed: cerrarPQRSA,
           child: Text(
             "Terminar PQRSA",
             style: TextStyle(color: Colores.black),

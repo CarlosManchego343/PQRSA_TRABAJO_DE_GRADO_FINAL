@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pqrsafinal/Usuarios/ui/ManejoDeUsuarios/tablaDeManejo.dart';
-import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/menuDeReportes.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
+
+import '../../../WidgetsGenerales/ReportesDeLasPQRSA/reportesGenerales.dart';
 
 
 class menuPrincipalUsuario extends StatefulWidget {
@@ -12,7 +13,7 @@ class menuPrincipalUsuario extends StatefulWidget {
 
 class menuPrincipalUsuarioState extends State<menuPrincipalUsuario> with TickerProviderStateMixin{
 
-  List<Widget> pages = [tablaDeManejo(), MenuDeReportes()];
+  List<Widget> pages = [tablaDeManejo(), ReportesGenerales()];
   late TabController _controller;
 
   @override

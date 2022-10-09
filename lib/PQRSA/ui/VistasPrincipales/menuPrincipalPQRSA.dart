@@ -1,6 +1,6 @@
-import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/menuDeReportes.dart';
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/PQRSActivas.dart';
 import 'package:pqrsafinal/PQRSA/ui/VistasPrincipales/menuCreacionPQRS.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/reportesGenerales.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class menuPrincipalPQRSA extends StatefulWidget {
 }
 
 class menuPrincipalPQRSAState extends State<menuPrincipalPQRSA> with TickerProviderStateMixin{
-  List<Widget> pages = [PQRSActivas(), menuCreacionPQRS(), MenuDeReportes()];
+  List<Widget> pages = [PQRSActivas(), menuCreacionPQRS(), ReportesGenerales()];
   late TabController _controller;
 
   @override
