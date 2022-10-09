@@ -14,18 +14,26 @@ class botones extends StatefulWidget {
 }
 
 class botonesState extends State<botones> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: SizedBox(
-            height: 320.0,
-            child: ListView(
-              controller: ScrollController(),
-              children: <Widget>[
-                Column(
-                  children: <Widget>[columnaBotones(widget.id)],
-                )
-              ],
+        child: SizedBox (
+            height: 420.0,
+            child: Container(
+              margin: EdgeInsets.only(left: 90, top: 8, bottom: 8, right: 90),
+              child: Scrollbar(
+                controller: _scrollController,
+                isAlwaysShown: true,
+                scrollbarOrientation: ScrollbarOrientation.right,
+                thickness: 10,
+                radius: Radius.circular(20),
+                child: ListView(
+                  controller: _scrollController,
+                  scrollDirection: Axis.vertical,
+                  children: [columnaBotones(widget.id)],
+                ),
+              ),
             )));
   }
 }
