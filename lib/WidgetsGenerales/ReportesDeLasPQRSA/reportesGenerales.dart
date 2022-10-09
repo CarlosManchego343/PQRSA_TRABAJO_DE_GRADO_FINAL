@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSACerradas.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSATotales.dart';
 
 class ReportesGenerales extends StatefulWidget {
   @override
@@ -15,7 +16,10 @@ class ReportesGeneralesState extends State<ReportesGenerales> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
-            children: [graficaDePQRSACerradas()],
+            children: [
+              Flexible(flex: 2, child: graficaDePQRSACerradas()),
+              Flexible(flex: 2, child: graficaDePQRSATotales())
+            ],
           )
         ],
       )

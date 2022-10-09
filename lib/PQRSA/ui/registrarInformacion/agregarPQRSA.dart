@@ -16,6 +16,9 @@ class agregarPQRSA extends StatefulWidget {
 class agregarPQRSAtate extends State<agregarPQRSA> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
+  Map? datosDeGraficaPQRSATotalidad;
+  CollectionReference datosPQRSA =
+      FirebaseFirestore.instance.collection('Datos_PQRSA');
 
   String _tipoSeleccionado = 'Tipo de PQRSA';
   String _areaSeleccionada = 'Area';
@@ -29,7 +32,6 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     'Sugerencia',
     'Agradecimiento'
   ];
-
 
   // ignore: prefer_final_fields
   List _area = [
@@ -53,6 +55,14 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     _fechaRadicacion = TextEditingController(text: "");
     _documentoDelRecibidor = TextEditingController(text: "");
     _documentoDelCliente = TextEditingController(text: "");
+    datosPQRSA
+        .where("id", isEqualTo: "Totalidad")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSATotalidad = snapshot.docs[0].data() as Map?;
+              })
+            });
   }
 
   void _llamarFechaRadicacion() async {
@@ -63,16 +73,15 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
     });
   }
 
-  Future <DateTime?> getDatePickerWidget() {
+  Future<DateTime?> getDatePickerWidget() {
     return showDatePicker(
-      context: context, 
-      initialDate: DateTime.now(), 
-      firstDate: DateTime(2022), 
-      lastDate: DateTime(3021),
-      builder: (context, child) {
-        return Theme(data: ThemeData.dark(), child: child!);
-      }
-      );
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2022),
+        lastDate: DateTime(3021),
+        builder: (context, child) {
+          return Theme(data: ThemeData.dark(), child: child!);
+        });
   }
 
   void _limpiarCampos() {
@@ -111,6 +120,42 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                           "Estado": "Abierta",
                           "Tipo_de_pqrsa": _tipoSeleccionado
                         }),
+                        if (_tipoSeleccionado == "Agradecimiento")
+                          {
+                            datosPQRSA.doc("Totalidad").update({
+                              "Agradecimientos": datosDeGraficaPQRSATotalidad![
+                                      "Agradecimientos"] +
+                                  1
+                            })
+                          }
+                        else if (_tipoSeleccionado == "Petición")
+                          {
+                            datosPQRSA.doc("Totalidad").update({
+                              "Peticion":
+                                  datosDeGraficaPQRSATotalidad!["Peticion"] + 1
+                            })
+                          }
+                        else if (_tipoSeleccionado == "Queja")
+                          {
+                            datosPQRSA.doc("Totalidad").update({
+                              "Queja": datosDeGraficaPQRSATotalidad!["Queja"] + 1
+                            })
+                          }
+                        else if (_tipoSeleccionado == "Reclamo")
+                          {
+                            datosPQRSA.doc("Totalidad").update({
+                              "Reclamo":
+                                  datosDeGraficaPQRSATotalidad!["Reclamo"] + 1
+                            })
+                          }
+                        else if (_tipoSeleccionado == "Sugerencia")
+                          {
+                            datosPQRSA.doc("Totalidad").update({
+                              "Sugerencias":
+                                  datosDeGraficaPQRSATotalidad!["Sugerencias"] +
+                                      1
+                            })
+                          },
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
                                 Text("Información registrada correctamente"))),
