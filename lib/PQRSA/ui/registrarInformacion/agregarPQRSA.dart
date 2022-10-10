@@ -145,7 +145,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                         else if (_tipoSeleccionado == "Petición")
                           {
                             datosPQRSA.doc("Totalidad").update({
-                              "Peticion":
+                              "Peticiones":
                                   datosDeGraficaPQRSATotalidad!["Peticiones"] + 1
                             }),
                             datosPQRSA.doc("Abiertas").update({

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSAAbiertas.dart';
 import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSACerradas.dart';
+import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSADevueltas.dart';
 import 'package:pqrsafinal/WidgetsGenerales/ReportesDeLasPQRSA/graficaDePQRSATotales.dart';
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -35,7 +36,7 @@ class ReportesGeneralesState extends State<ReportesGenerales> {
           Row(
             children: [
               Flexible(flex: 2, child: graficaDePQRSAAbiertas()),
-              Flexible(flex: 2, child: Text("Llename papi"))
+              Flexible(flex: 2, child: graficaDePQRSADevueltas())
             ],
           ),
         ],

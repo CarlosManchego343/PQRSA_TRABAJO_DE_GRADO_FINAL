@@ -127,15 +127,15 @@ class columnaBotonesState extends State<columnaBotones> {
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Petición") {
       datosPQRSA
           .doc("Cerradas")
-          .update({"Peticion": datosDeGraficaPQRSACerradas!["Peticion"] + 1});
+          .update({"Peticiones": datosDeGraficaPQRSACerradas!["Peticiones"] + 1});
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Queja") {
       datosPQRSA
           .doc("Cerradas")
-          .update({"Queja": datosDeGraficaPQRSACerradas!["Queja"] + 1});
+          .update({"Quejas": datosDeGraficaPQRSACerradas!["Quejas"] + 1});
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Reclamo") {
       datosPQRSA
           .doc("Cerradas")
-          .update({"Reclamo": datosDeGraficaPQRSACerradas!["Reclamo"] + 1});
+          .update({"Reclamos": datosDeGraficaPQRSACerradas!["Reclamos"] + 1});
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Sugerencia") {
       datosPQRSA
           .doc("Cerradas")
