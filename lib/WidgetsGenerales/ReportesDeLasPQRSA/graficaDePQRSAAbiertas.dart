@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class graficaDePQRSACerradas extends StatefulWidget {
+class graficaDePQRSAAbiertas extends StatefulWidget {
   @override
-  graficaDePQRSACerradasState createState() => graficaDePQRSACerradasState();
+  graficaDePQRSAAbiertasState createState() => graficaDePQRSAAbiertasState();
 }
 
-class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
+class graficaDePQRSAAbiertasState extends State<graficaDePQRSAAbiertas> {
   List<Datos>? datosDeLaGrafica;
 
   CollectionReference datosPQRSA =
@@ -21,7 +21,7 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
     super.initState();
 
     datosPQRSA
-        .where("id", isEqualTo: "Cerradas")
+        .where("id", isEqualTo: "Abiertas")
         .get()
         .then((QuerySnapshot snapshot) => {
               setState(() {
@@ -37,11 +37,13 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
             });
   }
 
+
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Column(children: [
       SfCircularChart(
-        title: ChartTitle(text: "Cantidad de PQRSA cerradas"),
+        title: ChartTitle(text: "Cantidad de PQRSA abiertas"),
         legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
         series: <CircularSeries>[
           PieSeries<Datos, String>(
@@ -54,6 +56,7 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
       )
     ]);
   }
+
 }
 
 class Datos {

@@ -26,8 +26,6 @@ class graficaDePQRSATotalesState extends State<graficaDePQRSATotales> {
         .then((QuerySnapshot snapshot) => {
               setState(() {
                 datos = snapshot.docs[0].data() as Map?;
-                print("Traje estos datos totales: ");
-                print(datos);
                 datosDeLaGrafica = [
                   Datos("Agradecimientos", datos!["Agradecimientos"]),
                   Datos("Quejas", datos!["Quejas"]),

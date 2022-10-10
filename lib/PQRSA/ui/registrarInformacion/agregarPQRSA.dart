@@ -17,6 +17,7 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseFirestore db = FirebaseFirestore.instance;
   Map? datosDeGraficaPQRSATotalidad;
+  Map? datosDeGraficaPQRSAAbiertas;
   CollectionReference datosPQRSA =
       FirebaseFirestore.instance.collection('Datos_PQRSA');
 
@@ -61,6 +62,14 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
         .then((QuerySnapshot snapshot) => {
               setState(() {
                 datosDeGraficaPQRSATotalidad = snapshot.docs[0].data() as Map?;
+              })
+            });
+    datosPQRSA
+        .where("id", isEqualTo: "Abiertas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSAAbiertas = snapshot.docs[0].data() as Map?;
               })
             });
   }
@@ -126,27 +135,47 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                               "Agradecimientos": datosDeGraficaPQRSATotalidad![
                                       "Agradecimientos"] +
                                   1
-                            })
+                            }),
+                            datosPQRSA.doc("Abiertas").update({
+                              "Agradecimientos": datosDeGraficaPQRSAAbiertas![
+                                      "Agradecimientos"] +
+                                  1
+                            }),
                           }
                         else if (_tipoSeleccionado == "Petición")
                           {
                             datosPQRSA.doc("Totalidad").update({
                               "Peticion":
-                                  datosDeGraficaPQRSATotalidad!["Peticion"] + 1
-                            })
+                                  datosDeGraficaPQRSATotalidad!["Peticiones"] + 1
+                            }),
+                            datosPQRSA.doc("Abiertas").update({
+                              "Peticiones": datosDeGraficaPQRSAAbiertas![
+                                      "Peticiones"] +
+                                  1
+                            }),
                           }
                         else if (_tipoSeleccionado == "Queja")
                           {
                             datosPQRSA.doc("Totalidad").update({
-                              "Queja": datosDeGraficaPQRSATotalidad!["Queja"] + 1
-                            })
+                              "Quejas": datosDeGraficaPQRSATotalidad!["Quejas"] + 1
+                            }),
+                            datosPQRSA.doc("Abiertas").update({
+                              "Quejas": datosDeGraficaPQRSAAbiertas![
+                                      "Quejas"] +
+                                  1
+                            }),
                           }
                         else if (_tipoSeleccionado == "Reclamo")
                           {
                             datosPQRSA.doc("Totalidad").update({
-                              "Reclamo":
-                                  datosDeGraficaPQRSATotalidad!["Reclamo"] + 1
-                            })
+                              "Reclamos":
+                                  datosDeGraficaPQRSATotalidad!["Reclamos"] + 1
+                            }),
+                            datosPQRSA.doc("Abiertas").update({
+                              "Reclamos": datosDeGraficaPQRSAAbiertas![
+                                      "Reclamos"] +
+                                  1
+                            }),
                           }
                         else if (_tipoSeleccionado == "Sugerencia")
                           {
@@ -154,7 +183,12 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                               "Sugerencias":
                                   datosDeGraficaPQRSATotalidad!["Sugerencias"] +
                                       1
-                            })
+                            }),
+                            datosPQRSA.doc("Abiertas").update({
+                              "Sugerencias": datosDeGraficaPQRSAAbiertas![
+                                      "Sugerencias"] +
+                                  1
+                            }),
                           },
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
