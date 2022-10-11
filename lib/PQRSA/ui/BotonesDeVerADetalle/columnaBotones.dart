@@ -44,11 +44,17 @@ class columnaBotonesState extends State<columnaBotones> {
 
   String? tipoDePQRSA;
 
+  String? estadoAEditar;
+
   Map? clienteEncontrado;
 
   String? fechaDeCierre;
 
   Map? datosDeGraficaPQRSACerradas;
+
+  Map? datosDeGraficaPQRSAAbiertas;
+
+  Map? datosDeGraficaPQRSADevueltas;
 
   Future seleccionarArchivo() async {
     final result = await FilePicker.platform.pickFiles();
@@ -87,6 +93,7 @@ class columnaBotonesState extends State<columnaBotones> {
                 numeroIdentidadCliente =
                     pqrsaEncontrada!["Documento_del_cliente"];
                 tipoDePQRSA = pqrsaEncontrada!["Tipo_de_pqrsa"];
+                estadoAEditar = pqrsaEncontrada!["Estado"];
               }),
               cliente
                   .where('Numero_de_documento',
@@ -107,9 +114,93 @@ class columnaBotonesState extends State<columnaBotones> {
                 datosDeGraficaPQRSACerradas = snapshot.docs[0].data() as Map?;
               })
             });
+    datosPQRSA
+        .where("id", isEqualTo: "Abiertas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSAAbiertas = snapshot.docs[0].data() as Map?;
+              })
+            });
+    datosPQRSA
+        .where("id", isEqualTo: "Devueltas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSADevueltas = snapshot.docs[0].data() as Map?;
+              })
+            });
   }
 
   void cerrarPQRSA() {
+    if (estadoAEditar == "Abierta") {
+      if (tipoDePQRSA == "Agradecimiento") {
+        datosPQRSA.doc("Abiertas").update({
+          "Agradecimientos": datosDeGraficaPQRSAAbiertas!["Agradecimientos"] - 1
+        });
+        datosPQRSA.doc("Cerradas").update({
+          "Agradecimientos": datosDeGraficaPQRSACerradas!["Agradecimientos"] + 1
+        });
+      } else if (tipoDePQRSA == "Petición") {
+        datosPQRSA.doc("Abiertas").update(
+            {"Peticiones": datosDeGraficaPQRSAAbiertas!["Peticiones"] - 1});
+        datosPQRSA.doc("Cerradas").update(
+            {"Peticiones": datosDeGraficaPQRSACerradas!["Peticiones"] + 1});
+      } else if (tipoDePQRSA == "Queja") {
+        datosPQRSA
+            .doc("Abiertas")
+            .update({"Quejas": datosDeGraficaPQRSAAbiertas!["Quejas"] - 1});
+        datosPQRSA
+            .doc("Cerradas")
+            .update({"Quejas": datosDeGraficaPQRSACerradas!["Quejas"] + 1});
+      } else if (tipoDePQRSA == "Reclamo") {
+        datosPQRSA
+            .doc("Abiertas")
+            .update({"Reclamos": datosDeGraficaPQRSAAbiertas!["Reclamos"] - 1});
+        datosPQRSA
+            .doc("Cerradas")
+            .update({"Reclamos": datosDeGraficaPQRSACerradas!["Reclamos"] + 1});
+      } else if (tipoDePQRSA == "Sugerencia") {
+        datosPQRSA.doc("Abiertas").update(
+            {"Sugerencias": datosDeGraficaPQRSAAbiertas!["Sugerencias"] - 1});
+        datosPQRSA.doc("Cerradas").update(
+            {"Sugerencias": datosDeGraficaPQRSACerradas!["Sugerencias"] + 1});
+      }
+    } else if (estadoAEditar == "Devuelta") {
+      if (tipoDePQRSA == "Agradecimiento") {
+        datosPQRSA.doc("Devueltas").update({
+          "Agradecimientos":
+              datosDeGraficaPQRSADevueltas!["Agradecimientos"] - 1
+        });
+        datosPQRSA.doc("Cerradas").update({
+          "Agradecimientos": datosDeGraficaPQRSACerradas!["Agradecimientos"] + 1
+        });
+      } else if (tipoDePQRSA == "Petición") {
+        datosPQRSA.doc("Devueltas").update(
+            {"Peticiones": datosDeGraficaPQRSADevueltas!["Peticiones"] - 1});
+        datosPQRSA.doc("Cerradas").update(
+            {"Peticiones": datosDeGraficaPQRSACerradas!["Peticiones"] + 1});
+      } else if (tipoDePQRSA == "Queja") {
+        datosPQRSA
+            .doc("Devueltas")
+            .update({"Quejas": datosDeGraficaPQRSADevueltas!["Quejas"] - 1});
+        datosPQRSA
+            .doc("Cerradas")
+            .update({"Quejas": datosDeGraficaPQRSACerradas!["Quejas"] + 1});
+      } else if (tipoDePQRSA == "Reclamo") {
+        datosPQRSA.doc("Devueltas").update(
+            {"Reclamos": datosDeGraficaPQRSADevueltas!["Reclamos"] - 1});
+        datosPQRSA
+            .doc("Cerradas")
+            .update({"Reclamos": datosDeGraficaPQRSACerradas!["Reclamos"] + 1});
+      } else if (tipoDePQRSA == "Sugerencia") {
+        datosPQRSA.doc("Devueltas").update(
+            {"Sugerencias": datosDeGraficaPQRSADevueltas!["Sugerencias"] - 1});
+        datosPQRSA.doc("Cerradas").update(
+            {"Sugerencias": datosDeGraficaPQRSACerradas!["Sugerencias"] + 1});
+      }
+    }
+
     pqrsaCerradas.doc(pqrsaEncontrada!["id"]).set({
       "id": pqrsaEncontrada!["id"],
       "Area": pqrsaEncontrada!["Area"],
@@ -121,39 +212,6 @@ class columnaBotonesState extends State<columnaBotones> {
       "Fecha_de_cierre": fechaDeCierre,
       "Tipo_de_pqrsa": pqrsaEncontrada!["Tipo_de_pqrsa"],
     });
-    
-    if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Agradecimiento") {
-      
-      datosPQRSA.doc("Cerradas").update({
-        "Agradecimientos": datosDeGraficaPQRSACerradas!["Agradecimientos"] + 1
-      });
-
-    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Petición") {
-      
-      datosPQRSA
-          .doc("Cerradas")
-          .update({"Peticiones": datosDeGraficaPQRSACerradas!["Peticiones"] + 1});
-
-    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Queja") {
-      
-      datosPQRSA
-          .doc("Cerradas")
-          .update({"Quejas": datosDeGraficaPQRSACerradas!["Quejas"] + 1});
-
-    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Reclamo") {
-
-      datosPQRSA
-          .doc("Cerradas")
-          .update({"Reclamos": datosDeGraficaPQRSACerradas!["Reclamos"] + 1});
-
-    } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Sugerencia") {
-      datosPQRSA
-
-          .doc("Cerradas")
-          .update({"Sugerencias": datosDeGraficaPQRSACerradas!["Sugerencias"] + 1});
-          
-    }
-
     pqrsa.doc(pqrsaEncontrada!["id"]).delete();
     Navigator.pushNamed(context, '/menuPrincipalPQRSA');
   }
@@ -216,10 +274,10 @@ class columnaBotonesState extends State<columnaBotones> {
         FlatButton(
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => contenedorEditarEstadoPQRSA(widget.id))
-              );
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        contenedorEditarEstadoPQRSA(widget.id)));
           },
           child: Text(
             "Devolver PQRSA",
