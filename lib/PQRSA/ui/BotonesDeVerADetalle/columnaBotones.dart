@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pqrsafinal/Cliente/ui/EditarCliente/contenedorEditarCliente.dart';
+import 'package:pqrsafinal/PQRSA/ui/EditarPQRSA/contenedorEditarEstadoPQRSA.dart';
 
 import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 
@@ -120,26 +121,37 @@ class columnaBotonesState extends State<columnaBotones> {
       "Fecha_de_cierre": fechaDeCierre,
       "Tipo_de_pqrsa": pqrsaEncontrada!["Tipo_de_pqrsa"],
     });
+    
     if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Agradecimiento") {
+      
       datosPQRSA.doc("Cerradas").update({
         "Agradecimientos": datosDeGraficaPQRSACerradas!["Agradecimientos"] + 1
       });
+
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Petición") {
+      
       datosPQRSA
           .doc("Cerradas")
           .update({"Peticiones": datosDeGraficaPQRSACerradas!["Peticiones"] + 1});
+
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Queja") {
+      
       datosPQRSA
           .doc("Cerradas")
           .update({"Quejas": datosDeGraficaPQRSACerradas!["Quejas"] + 1});
+
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Reclamo") {
+
       datosPQRSA
           .doc("Cerradas")
           .update({"Reclamos": datosDeGraficaPQRSACerradas!["Reclamos"] + 1});
+
     } else if (pqrsaEncontrada!["Tipo_de_pqrsa"] == "Sugerencia") {
       datosPQRSA
+
           .doc("Cerradas")
           .update({"Sugerencias": datosDeGraficaPQRSACerradas!["Sugerencias"] + 1});
+          
     }
 
     pqrsa.doc(pqrsaEncontrada!["id"]).delete();
@@ -202,7 +214,13 @@ class columnaBotonesState extends State<columnaBotones> {
         ),
         SizedBox(height: 25),
         FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => contenedorEditarEstadoPQRSA(widget.id))
+              );
+          },
           child: Text(
             "Devolver PQRSA",
             style: TextStyle(color: Colores.black),

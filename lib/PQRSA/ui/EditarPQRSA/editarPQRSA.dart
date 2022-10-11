@@ -105,7 +105,6 @@ class editarPQRSAState extends State<editarPQRSA> {
             "Documento_del_recibidor": _documentoDelRecibidor!.text,
             "Fecha_de_radicacion": _fechaRadicacion!.text,
             "Asunto": _asunto!.text,
-            "Estado": "Abierta",
             "Tipo_de_pqrsa": _tipoSeleccionado
           });
           ScaffoldMessenger.of(context).showSnackBar(
@@ -354,7 +353,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                     editarPQRSA();
                   },
                   child: Text(
-                    "Registrar",
+                    "Editar",
                     style: TextStyle(color: Colores.black),
                   ),
                   color: Colores.Botones,
