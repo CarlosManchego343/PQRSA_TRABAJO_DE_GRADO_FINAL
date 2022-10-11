@@ -69,43 +69,46 @@ class contenedorEditarEstadoPQRSAState
   }
 
   void editarEstado() {
-    if (tipoAEditar == "Agradecimiento") {
-      datosPQRSA.doc("Abiertas").update({
-        "Agradecimientos": datosDeGraficaPQRSAAbiertas!["Agradecimientos"] - 1
-      });
-      datosPQRSA.doc("Devueltas").update({
-        "Agradecimientos": datosDeGraficaPQRSADevueltas!["Agradecimientos"] + 1
-      });
-    } else if (tipoAEditar == "Petición") {
-      datosPQRSA.doc("Abiertas").update(
-          {"Peticiones": datosDeGraficaPQRSAAbiertas!["Peticiones"] - 1});
-      datosPQRSA.doc("Devueltas").update(
-          {"Peticiones": datosDeGraficaPQRSADevueltas!["Peticiones"] + 1});
-    } else if (tipoAEditar == "Reclamo") {
-      datosPQRSA
-          .doc("Abiertas")
-          .update({"Reclamos": datosDeGraficaPQRSAAbiertas!["Reclamos"] - 1});
-      datosPQRSA
-          .doc("Devueltas")
-          .update({"Reclamos": datosDeGraficaPQRSADevueltas!["Reclamos"] + 1});
-    } else if (tipoAEditar == "Queja") {
-      datosPQRSA
-          .doc("Abiertas")
-          .update({"Quejas": datosDeGraficaPQRSAAbiertas!["Quejas"] - 1});
-      datosPQRSA
-          .doc("Devueltas")
-          .update({"Quejas": datosDeGraficaPQRSADevueltas!["Quejas"] + 1});
-    } else if (tipoAEditar == "Sugerencia") {
-      datosPQRSA
-          .doc("Abiertas")
-          .update({"Sugerencias": datosDeGraficaPQRSAAbiertas!["Sugerencias"] - 1});
-      datosPQRSA
-          .doc("Devueltas")
-          .update({"Sugerencias": datosDeGraficaPQRSADevueltas!["Sugerencias"] + 1});
+    if (estadoAEditar != "Devuelta") {
+      if (tipoAEditar == "Agradecimiento") {
+        datosPQRSA.doc("Abiertas").update({
+          "Agradecimientos": datosDeGraficaPQRSAAbiertas!["Agradecimientos"] - 1
+        });
+        datosPQRSA.doc("Devueltas").update({
+          "Agradecimientos":
+              datosDeGraficaPQRSADevueltas!["Agradecimientos"] + 1
+        });
+      } else if (tipoAEditar == "Petición") {
+        datosPQRSA.doc("Abiertas").update(
+            {"Peticiones": datosDeGraficaPQRSAAbiertas!["Peticiones"] - 1});
+        datosPQRSA.doc("Devueltas").update(
+            {"Peticiones": datosDeGraficaPQRSADevueltas!["Peticiones"] + 1});
+      } else if (tipoAEditar == "Reclamo") {
+        datosPQRSA
+            .doc("Abiertas")
+            .update({"Reclamos": datosDeGraficaPQRSAAbiertas!["Reclamos"] - 1});
+        datosPQRSA.doc("Devueltas").update(
+            {"Reclamos": datosDeGraficaPQRSADevueltas!["Reclamos"] + 1});
+      } else if (tipoAEditar == "Queja") {
+        datosPQRSA
+            .doc("Abiertas")
+            .update({"Quejas": datosDeGraficaPQRSAAbiertas!["Quejas"] - 1});
+        datosPQRSA
+            .doc("Devueltas")
+            .update({"Quejas": datosDeGraficaPQRSADevueltas!["Quejas"] + 1});
+      } else if (tipoAEditar == "Sugerencia") {
+        datosPQRSA.doc("Abiertas").update(
+            {"Sugerencias": datosDeGraficaPQRSAAbiertas!["Sugerencias"] - 1});
+        datosPQRSA.doc("Devueltas").update(
+            {"Sugerencias": datosDeGraficaPQRSADevueltas!["Sugerencias"] + 1});
+      }
+      db.collection('PQRSA').doc(pqrsaAEditar).update({"Estado": "Devuelta"});
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("PQRSA editada correctamente")));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Esta PQRSA ya se devolvio")));
     }
-    db.collection('PQRSA').doc(pqrsaAEditar).update({"Estado": "Devuelta"});
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("PQRSA editada correctamente")));
   }
 
   @override

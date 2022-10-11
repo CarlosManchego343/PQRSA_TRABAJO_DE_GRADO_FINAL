@@ -15,6 +15,9 @@ class editarAreaYEstadoPQRSAState extends State<editarAreaYEstadoPQRSA> {
 
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
+  CollectionReference datosPQRSA =
+      FirebaseFirestore.instance.collection('Datos_PQRSA');
+
   String _areaSeleccionada = 'Area';
 
   List _area = [
@@ -29,7 +32,15 @@ class editarAreaYEstadoPQRSAState extends State<editarAreaYEstadoPQRSA> {
 
   late Map? pqrsaEncontrada;
 
+  late Map? datosDeGraficaPQRSAAbiertas;
+
+  late Map? datosDeGraficaPQRSADevueltas;
+
   late String? pqrsaAEditar;
+
+  late String? estadoAEditar;
+
+  late String? tipoAEditar;
 
   @override
   void initState() {
@@ -44,12 +55,78 @@ class editarAreaYEstadoPQRSAState extends State<editarAreaYEstadoPQRSA> {
               setState(() {
                 pqrsaEncontrada = snapshot.docs[0].data() as Map?;
                 _areaSeleccionada = pqrsaEncontrada!["Area"];
+                tipoAEditar = pqrsaEncontrada!["Tipo_de_pqrsa"];
+                estadoAEditar = pqrsaEncontrada!["Estado"];
+              })
+            });
+    datosPQRSA
+        .where("id", isEqualTo: "Abiertas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSAAbiertas = snapshot.docs[0].data() as Map?;
+              })
+            });
+    datosPQRSA
+        .where("id", isEqualTo: "Devueltas")
+        .get()
+        .then((QuerySnapshot snapshot) => {
+              setState(() {
+                datosDeGraficaPQRSADevueltas = snapshot.docs[0].data() as Map?;
               })
             });
   }
 
   void editarPQRSA() {
-    print("Entre a editar");
+    if (estadoAEditar != "Devuelta") {
+      if (_areaSeleccionada != 'Area') {
+        if (tipoAEditar == "Agradecimiento") {
+          datosPQRSA.doc("Abiertas").update({
+            "Agradecimientos":
+                datosDeGraficaPQRSAAbiertas!["Agradecimientos"] - 1
+          });
+          datosPQRSA.doc("Devueltas").update({
+            "Agradecimientos":
+                datosDeGraficaPQRSADevueltas!["Agradecimientos"] + 1
+          });
+        } else if (tipoAEditar == "Petición") {
+          datosPQRSA.doc("Abiertas").update(
+              {"Peticiones": datosDeGraficaPQRSAAbiertas!["Peticiones"] - 1});
+          datosPQRSA.doc("Devueltas").update(
+              {"Peticiones": datosDeGraficaPQRSADevueltas!["Peticiones"] + 1});
+        } else if (tipoAEditar == "Reclamo") {
+          datosPQRSA.doc("Abiertas").update(
+              {"Reclamos": datosDeGraficaPQRSAAbiertas!["Reclamos"] - 1});
+          datosPQRSA.doc("Devueltas").update(
+              {"Reclamos": datosDeGraficaPQRSADevueltas!["Reclamos"] + 1});
+        } else if (tipoAEditar == "Queja") {
+          datosPQRSA
+              .doc("Abiertas")
+              .update({"Quejas": datosDeGraficaPQRSAAbiertas!["Quejas"] - 1});
+          datosPQRSA
+              .doc("Devueltas")
+              .update({"Quejas": datosDeGraficaPQRSADevueltas!["Quejas"] + 1});
+        } else if (tipoAEditar == "Sugerencia") {
+          datosPQRSA.doc("Abiertas").update(
+              {"Sugerencias": datosDeGraficaPQRSAAbiertas!["Sugerencias"] - 1});
+          datosPQRSA.doc("Devueltas").update({
+            "Sugerencias": datosDeGraficaPQRSADevueltas!["Sugerencias"] + 1
+          });
+        }
+        db
+            .collection('PQRSA')
+            .doc(pqrsaAEditar)
+            .update({"Area": _areaSeleccionada, "Estado": "Devuelta"});
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("PQRSA editada correctamente")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Por favor, elija una area")));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Esta PQRSA ya se devolvio")));
+    }
   }
 
   @override
