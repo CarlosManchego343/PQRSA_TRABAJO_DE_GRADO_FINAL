@@ -48,7 +48,8 @@ class columnaICState extends State<columnaIC> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (clienteEncontrado != null) ?
+    Column(
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -219,6 +220,8 @@ class columnaICState extends State<columnaIC> {
         ),
         SizedBox(height: 15)
       ],
+    ): Container(
+      child: Center(child: Text("Cargando...", style: TextStyle(color: Colores.black),)),
     );
   }
 }

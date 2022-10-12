@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pqrsafinal/WidgetsGenerales/Theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class graficaDePQRSACerradas extends StatefulWidget {
@@ -53,7 +54,9 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
               )      
         ],
       )
-    ]) : Container();
+    ]) : Container(
+      child: Center(child: Text("Cargando...", style: TextStyle(color: Colores.black),)),
+    );
   }
 }
 

@@ -14,9 +14,9 @@ class columna2IBPQRSA extends StatefulWidget {
 
 class columna2IBPQRSAState extends State<columna2IBPQRSA> {
 
-  late Map? informacionColumna;
+  Map? informacionColumna;
   CollectionReference pqrsa = FirebaseFirestore.instance.collection('PQRSA');
-  late String? id;
+  String? id;
 
   @override
   void initState() {
@@ -35,7 +35,8 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (informacionColumna != null) ?
+    Column(
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -119,6 +120,8 @@ class columna2IBPQRSAState extends State<columna2IBPQRSA> {
           ],
         ),
       ],
+    ): Container(
+      child: Center(child: Text("Cargando...", style: TextStyle(color: Colores.black),)),
     );
   }
 }
