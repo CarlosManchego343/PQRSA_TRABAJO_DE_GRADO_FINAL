@@ -35,12 +35,8 @@ class documentosPQRSAState extends State<documentosPQRSA> {
 
     //Visible para el usuario dentro de la carpeta de descargas
 
-    if (defaultTargetPlatform == TargetPlatform.linux ||
-        defaultTargetPlatform == TargetPlatform.macOS ||
-        defaultTargetPlatform == TargetPlatform.windows) {
-      final directorioDescargas = await getDownloadsDirectory();
+    final directorioDescargas = await getDownloadsDirectory();
       print(directorioDescargas);
-    }
 
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Se descargo: ${ref.name}")));

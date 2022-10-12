@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         title: 'PQRSA',
         theme: ThemeData(fontFamily: 'OpenSans'),
-        initialRoute: "/menuPrincipalUsuarios",
+        initialRoute: "/menuPrincipalPQRSA",
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           "/loginWeb": (BuildContext context) => new LoginWeb(),

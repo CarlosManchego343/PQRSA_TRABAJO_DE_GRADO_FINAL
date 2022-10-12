@@ -76,9 +76,9 @@ class tablaDeUsuariosState extends State<tablaDeUsuarios> {
         color: Colores.Botones,
       )),
       DataCell(FlatButton(
-        onPressed: () async{
-          await AuthService().deleteUser(documentSnapshot.get('Correo'), documentSnapshot.get('Contrasenia'));
-          await db.collection("Usuarios").doc(documentSnapshot.id).delete;
+        onPressed: () {
+          AuthService().deleteUser(documentSnapshot.get('Correo'), documentSnapshot.get('Contrasenia'));
+          db.collection("Usuarios").doc(documentSnapshot.id).delete;
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("Usuario eliminado con exito")));
         },
