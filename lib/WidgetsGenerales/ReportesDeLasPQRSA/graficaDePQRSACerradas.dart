@@ -39,7 +39,8 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return (datos != null) ?
+    Column(children: [
       SfCircularChart(
         title: ChartTitle(text: "Cantidad de PQRSA cerradas"),
         legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
@@ -52,7 +53,7 @@ class graficaDePQRSACerradasState extends State<graficaDePQRSACerradas> {
               )      
         ],
       )
-    ]);
+    ]) : Container();
   }
 }
 
