@@ -20,7 +20,6 @@ class contenedorEditarUsuarioState extends State<contenedorEditarUsuario> {
 
   @override
   Widget build(BuildContext context) {
-    print("Llego este id " + widget.id);
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 100,
@@ -39,8 +38,6 @@ class contenedorEditarUsuarioState extends State<contenedorEditarUsuario> {
         ),
       body: Center(
         child: Container(
-          height: 300,
-          width: 500,
           child: Card(
             child: Column(
               children: <Widget>[

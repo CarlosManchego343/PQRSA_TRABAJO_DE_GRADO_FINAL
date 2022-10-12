@@ -1,36 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:pqrsafinal/Usuarios/ui/AgregarUsuario/agregarUsuario.dart';
+import 'package:pqrsafinal/Usuarios/ui/EditarUsuario/editarUsuario.dart';
 
 import '../../../WidgetsGenerales/Theme.dart';
 
-class contenedorAgregarUsuario extends StatelessWidget {
 
-  final double opacidad;
+class contenedorAgregarUsuario extends StatefulWidget {
+  @override
+  contenedorAgregarUsuarioState createState() => contenedorAgregarUsuarioState();
 
-  final Function ocultarContenedor;
+}
 
-  contenedorAgregarUsuario( this.opacidad, this.ocultarContenedor);
+class contenedorAgregarUsuarioState extends State<contenedorAgregarUsuario> {
+
+  void volverAPrincipal() {
+    Navigator.pushNamed(context, '/menuPrincipalUsuarios');
+  } 
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      duration: Duration( milliseconds: 600),
-      curve: Curves.easeOut,
-      opacity: opacidad,
-      child: Container(
-          height: 400,
-          width: 500,
+    return Scaffold(
+      appBar: AppBar(
+          toolbarHeight: 100,
+          title:
+              Image.asset('assets/img/logoPQRSA.png', width: 280, height: 100),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colores.bgCabeceraPrincipal,
+          actions: <Widget>[
+            FlatButton(
+                onPressed: volverAPrincipal,
+                child: Text(
+                  'Volver al menú',
+                  style: TextStyle(color: Colores.black, fontSize: 20),
+                ))
+          ],
+        ),
+      body: Center(
+        child: Container(
           child: Card(
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    IconButton(
-                        color: Colores.columnaCodigos,
-                        onPressed: () => ocultarContenedor(),
-                        icon: Icon(Icons.cancel_sharp))
-                  ],
-                ),
                 agregarUsuario()
               ],
             ),
@@ -40,7 +49,9 @@ class contenedorAgregarUsuario extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5)),
             margin: EdgeInsets.all(5),
             elevation: 10,
-          )),
+          ))
+      )
     );
   }
 }
+

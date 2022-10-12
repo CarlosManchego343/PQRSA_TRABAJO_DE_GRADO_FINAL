@@ -15,24 +15,6 @@ class tablaDeManejo extends StatefulWidget {
 }
 
 class tablaDeManejoState extends State<tablaDeManejo> {
-  
-  double _opacidad = 0;
-
-  void _mostrarCardIngresarUsuario() {
-    setState(() {
-      if (_opacidad == 0) {
-        _opacidad = 1;
-      }
-    });
-  }
-
-  void _ocultarCardIngresarUsuario() {
-    setState(() {
-      if (_opacidad == 1) {
-        _opacidad = 0;
-      }
-    });
-  }
 
   @override
   void initState() {
@@ -44,9 +26,7 @@ class tablaDeManejoState extends State<tablaDeManejo> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-            child: Stack(
-          children: [
-            Column(
+            child: Column(
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -56,7 +36,13 @@ class tablaDeManejoState extends State<tablaDeManejo> {
                       child: FlatButton(
                           textColor: Colores.black,
                           color: Colores.Botones,
-                          onPressed: _mostrarCardIngresarUsuario,
+                          onPressed: () {
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(
+                                builder: (context) => contenedorAgregarUsuario())
+                              );
+                          },
                           child: Padding(
                               padding: EdgeInsets.only(
                                   left: 16.0, right: 16.0, top: 12, bottom: 12),
@@ -77,14 +63,7 @@ class tablaDeManejoState extends State<tablaDeManejo> {
                   ],
                 ))
               ],
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: contenedorAgregarUsuario(
-                  _opacidad, _ocultarCardIngresarUsuario),
-            ),
-          ],
-        )),
+            ),),
       ),
     );
   }
