@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -66,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1000369239946',
     projectId: 'pqrsafinal',
     storageBucket: 'pqrsafinal.appspot.com',
-    iosClientId: '1000369239946-k0l6ehpsgmv7gftccpddia9ao968al3f.apps.googleusercontent.com',
+    iosClientId:
+        '1000369239946-k0l6ehpsgmv7gftccpddia9ao968al3f.apps.googleusercontent.com',
     iosBundleId: 'com.example.pqrsafinal',
   );
 
@@ -76,7 +74,16 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1000369239946',
     projectId: 'pqrsafinal',
     storageBucket: 'pqrsafinal.appspot.com',
-    iosClientId: '1000369239946-k0l6ehpsgmv7gftccpddia9ao968al3f.apps.googleusercontent.com',
+    iosClientId:
+        '1000369239946-k0l6ehpsgmv7gftccpddia9ao968al3f.apps.googleusercontent.com',
     iosBundleId: 'com.example.pqrsafinal',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+      apiKey: "AIzaSyDB4RnQSeEcSqynK0TyktmM9KR2SYAy_0g",
+      authDomain: "pqrsafinal.firebaseapp.com",
+      projectId: "pqrsafinal",
+      storageBucket: "pqrsafinal.appspot.com",
+      messagingSenderId: "1000369239946",
+      appId: "1:1000369239946:web:ab9a2709747f6b53993a73");
 }

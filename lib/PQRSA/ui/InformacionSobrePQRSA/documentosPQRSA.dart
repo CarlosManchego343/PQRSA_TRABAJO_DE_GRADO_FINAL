@@ -30,18 +30,6 @@ class documentosPQRSAState extends State<documentosPQRSA> {
         FirebaseStorage.instance.ref("/Archivos/${widget.id}").listAll();
   }
 
-  Future descargarArchivos(Reference ref) async {
-    final url = await ref.getDownloadURL();
-
-    //Visible para el usuario dentro de la carpeta de descargas
-
-    final directorioDescargas = await getDownloadsDirectory();
-      print(directorioDescargas);
-
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Se descargo: ${ref.name}")));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,13 +63,6 @@ class documentosPQRSAState extends State<documentosPQRSA> {
                     final archivoMostrado = archivosEncontrados[index];
                     return ListTile(
                       title: Text(archivoMostrado.name),
-                      trailing: IconButton(
-                        onPressed: () => descargarArchivos(archivoMostrado),
-                        icon: Icon(
-                          Icons.download,
-                          color: Colores.columnaTitulos,
-                        ),
-                      ),
                     );
                   },
                 );
