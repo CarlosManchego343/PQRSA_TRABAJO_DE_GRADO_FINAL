@@ -19,7 +19,7 @@ class editarPQRSAState extends State<editarPQRSA> {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _tipoSeleccionado = 'Tipo de PQRSA';
-  String _areaSeleccionada = 'Area';
+
 
   // ignore: prefer_final_fields
   List _tipo = [
@@ -32,15 +32,6 @@ class editarPQRSAState extends State<editarPQRSA> {
   ];
 
   // ignore: prefer_final_fields
-  List _area = [
-    'Area',
-    'Legal',
-    'Finanzas',
-    'Producción',
-    'Seguridad',
-    'Social',
-    'Administración'
-  ];
   TextEditingController? _asunto;
   TextEditingController? _fechaRadicacion;
   TextEditingController? _documentoDelRecibidor;
@@ -89,7 +80,6 @@ class editarPQRSAState extends State<editarPQRSA> {
                     text: pqrsaEncontrada!["Documento_del_cliente"]);
                 _documentoDelRecibidor = TextEditingController(
                     text: pqrsaEncontrada!["Documento_del_recibidor"]);
-                _areaSeleccionada = pqrsaEncontrada!["Area"];
                 _tipoSeleccionado = pqrsaEncontrada!["Tipo_de_pqrsa"];
               })
             });
@@ -98,9 +88,7 @@ class editarPQRSAState extends State<editarPQRSA> {
   void editarPQRSA() {
     if (_formKey.currentState!.validate()) {
       if (_tipoSeleccionado != 'Tipo de PQRSA') {
-        if (_areaSeleccionada != 'Area') {
-          db.collection('PQRSA').doc(pqrsaAEditar).update({
-            "Area": _areaSeleccionada,
+        db.collection('PQRSA').doc(pqrsaAEditar).update({
             "Documento_del_cliente": _documentoDelCliente!.text,
             "Documento_del_recibidor": _documentoDelRecibidor!.text,
             "Fecha_de_radicacion": _fechaRadicacion!.text,
@@ -109,10 +97,6 @@ class editarPQRSAState extends State<editarPQRSA> {
           });
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("PQRSA editada correctamente")));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Por favor, elija una area")));
-        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Por favor, elija un tipo de PQRSA")));
@@ -138,9 +122,29 @@ class editarPQRSAState extends State<editarPQRSA> {
                 Row(children: <Widget>[
                   SizedBox(height: 100),
                   Flexible(
-                      flex: 2,
                       child: Column(
                         children: [
+                          SizedBox(height: 15),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0,
+                                left: 20.0,
+                                right: 20.0,
+                                bottom: 10.0),
+                            child: Input(
+                              placeholder: "Fecha de radicación",
+                              inputFormatter:
+                                  FilteringTextInputFormatter.deny(""),
+                              prefixIcon: Icon(Icons.date_range_rounded),
+                              onTap: _llamarFechaRadicacion,
+                              controller: _fechaRadicacion,
+                              validator: (fecha) {
+                                if (fecha.isEmpty) {
+                                  return 'Por favor introduzca la fecha de radicación';
+                                }
+                              },
+                            ),
+                          ),
                           SizedBox(height: 15),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -161,7 +165,7 @@ class editarPQRSAState extends State<editarPQRSA> {
                               },
                             ),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 15),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10.0,
@@ -217,91 +221,6 @@ class editarPQRSAState extends State<editarPQRSA> {
                                   );
                                 }).toList(),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Container(
-                              child: DropdownButtonFormField<String>(
-                                hint: Text('Area'),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  errorMaxLines: 2,
-                                  labelStyle: TextStyle(color: Colores.black),
-                                  contentPadding: const EdgeInsets.only(
-                                      top: 16.0, left: 10.0),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .focusColor
-                                          .withOpacity(0.2),
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .focusColor
-                                          .withOpacity(0.5),
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colores.BordeDeInputs,
-                                    ),
-                                  ),
-                                ),
-                                value: _areaSeleccionada,
-                                icon: const Icon(Icons.arrow_drop_down_sharp),
-                                iconSize: 28,
-                                elevation: 16,
-                                style: Theme.of(context).textTheme.bodyText1,
-                                onChanged: (String? newValue) {
-                                  if (newValue != null) {
-                                    setState(() {
-                                      _areaSeleccionada = newValue;
-                                    });
-                                  }
-                                },
-                                items: _area
-                                    .map<DropdownMenuItem<String>>((value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                  Flexible(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0,
-                                left: 20.0,
-                                right: 20.0,
-                                bottom: 10.0),
-                            child: Input(
-                              placeholder: "Fecha de radicación",
-                              inputFormatter:
-                                  FilteringTextInputFormatter.deny(""),
-                              prefixIcon: Icon(Icons.date_range_rounded),
-                              onTap: _llamarFechaRadicacion,
-                              controller: _fechaRadicacion,
-                              validator: (fecha) {
-                                if (fecha.isEmpty) {
-                                  return 'Por favor introduzca la fecha de radicación';
-                                }
-                              },
                             ),
                           ),
                           SizedBox(height: 15),
