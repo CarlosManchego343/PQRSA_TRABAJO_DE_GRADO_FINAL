@@ -400,14 +400,14 @@ class agregarPQRSAtate extends State<agregarPQRSA> {
                                 right: 20.0,
                                 bottom: 10.0),
                             child: Input(
-                              placeholder: "Documento del radicado",
+                              placeholder: "Documento del cliente",
                               inputFormatter:
                                   FilteringTextInputFormatter.digitsOnly,
                               prefixIcon: Icon(Icons.pin),
                               controller: _documentoDelCliente,
                               validator: (documentoC) {
                                 if (documentoC.isEmpty) {
-                                  return 'Por favor introduzca el número de documento del radicado';
+                                  return 'Por favor introduzca el número de documento del cliente';
                                 }
                               },
                             ),

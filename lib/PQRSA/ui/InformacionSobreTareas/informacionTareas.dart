@@ -34,7 +34,7 @@ class informacionTareasState extends State<informacionTareas> {
                             );
                         },
                         child: Text(
-                          "Agregar Tareas",
+                          "Agregar tareas",
                           style: TextStyle(color: Colores.black),
                         ),
                         color: Colores.Botones,
