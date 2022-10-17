@@ -24,7 +24,7 @@ class presentacionInformacionClienteState
             padding: const EdgeInsets.only(top: 16.0),
             child: Align(
               alignment: Alignment.center,
-              child: Text("Datos del radicante",
+              child: Text("Datos del cliente",
                   style: TextStyle(fontSize: 34, color: Colores.black)),
             ),
           ),
